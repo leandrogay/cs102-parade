@@ -9,7 +9,7 @@ public class Game {
         this.playerNumber = playerNumber;
     }
 
-    public int calculateScore(Player p) {
+    public int calculateScore(Player player) {
         //determine who has majority in each colour (with help of comparator class).
         //those with most cards in each color, the count will be +1. If got two or more players that hold majority, their cards
         //will be flipped over(flip to face down).
@@ -19,8 +19,8 @@ public class Game {
     public List<Integer> tabulateScore() {
         List<Integer> scores = new ArrayList<>();
         
-        for (Player p : players) {
-            scores.add(calculateScore(p));
+        for (Player player : players) {
+            scores.add(calculateScore(player));
         }
 
         return scores;

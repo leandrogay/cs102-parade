@@ -10,12 +10,12 @@ public class Player {
         this.playerName = playerName;
     }
 
-    public void addToHand(Card c) {
-        playerHand.add(c);
+    public void addToHand(Card card) {
+        playerHand.add(card);
     }
 
-    public void collectCard(Card c) {
-        collectedCards.add(c);
+    public void collectCard(Card card) {
+        collectedCards.add(card);
     }
 
     public int getScore() {
