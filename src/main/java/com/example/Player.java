@@ -18,6 +18,10 @@ public class Player {
         collectedCards.add(card);
     }
 
+    public String getName() {
+        return playerName;
+    }
+
     public int getScore() {
         return score;
     }
