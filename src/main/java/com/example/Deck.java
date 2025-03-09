@@ -1,19 +1,35 @@
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Stack;
 
 public class Deck {
-    private final Stack<Card> cards = new Stack<>();
+    private ArrayList<Card> cards;
+    private int cardCount;
 
-    public Deck() {
-        for (Card.Color color : Card.Color.values()) {
-            for (int value = 0; value <= 10; value++) {
-                cards.add(new Card(color, value));
-            }
-        }
+    public Deck(ArrayList<Card> initialCards) { // initialCards -> before any changes are made
+        this.cards = new ArrayList<>(initialCards);
+        this.cardCount = cards.size();
+    }
+
+    public void shuffle() { // shuffle
         Collections.shuffle(cards);
     }
 
-    public Card drawCard() {
-        return cards.isEmpty() ? null : cards.pop();
+    public Card draw() { // draw card
+        if (cardCount > 0) {
+            Card cardDrawn = cards.remove(0); // remove from top of the deck
+            cardCount--;
+            return cardDrawn;
+        } else {
+            return null; // no card drawn if deck is empty (maybe can throw custom error here idk)
+        }
     }
+
+    public int getCardCount() { // get number of cards in deck 
+        return cardCount;
+    }
+
+    // @Override
+    // public String toString() {
+    //     return "Deck{" + "cards=" + cards + ", cardCount=" + cardCount + '}';
+    // }
 }
