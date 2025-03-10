@@ -27,7 +27,7 @@ public class Player {
     }
 
     public int calculateScore() {
-        
+        return 0;
     }
 
 }
