@@ -92,5 +92,14 @@ public class Game {
         return false;
     }
 
-    
+    public boolean checkAllColors() {
+        for (Player player : players) {
+            if (player.getNumColors() == 6) { // player got all suites of the cards
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

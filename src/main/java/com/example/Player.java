@@ -42,4 +42,13 @@ public class Player {
         return 0;
     }
 
+    public int getNumColors() { // return the number of colors in collected hand
+        ArrayList<String> check_colors = new ArrayList<String>();
+        for (Card card : collectedCards) {
+            if (!check_colors.contains(card.getColor())) {
+                check_colors.add(card.getColor());
+            }
+        }
+        return check_colors.size();
+    }
 }
