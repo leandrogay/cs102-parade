@@ -4,7 +4,7 @@ public class Game {
     private Deck deck;
     private Table table;
     private int playerNumber;
-    private List<Player> players = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<>();
 
     public Game(int playerNumber) {
         this.deck = new Deck();
@@ -18,7 +18,7 @@ public class Game {
             String name = sc.nextLine();
             players.add(new Player(name));
         }
-        
+
         dealStartingHands();
         setTable();
     }
@@ -69,6 +69,10 @@ public class Game {
     //     // face down cards will now be scored as +1, and faceup cards will be their
     //     // value.
     // }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
 
     public List<Integer> tabulateScore() {
         List<Integer> scores = new ArrayList<>();
