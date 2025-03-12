@@ -18,7 +18,7 @@ public class Game {
             String name = sc.nextLine();
             players.add(new Player(name));
         }
-
+        
         dealStartingHands();
         setTable();
     }
