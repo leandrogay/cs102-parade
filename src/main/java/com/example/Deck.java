@@ -6,16 +6,26 @@ public class Deck {
     private int cardCount;
     private boolean isDrawable = true;
 
-    public Deck(ArrayList<Card> initialCards) { // initialCards -> before any changes are made
-        this.cards = new ArrayList<>(initialCards);
-        this.cardCount = cards.size();
+    public Deck() { 
+        this.cards = new ArrayList<>();
+        prepDeck();
+        shuffleDeck();
+        cardCount = this.cards.size();
     }
 
-    public void shuffle() { // shuffle
+    public void prepDeck() {
+        for (Card.Color color: Card.Color.values()) { // Loop through all colors
+            for (int value = 0; value <= 10; value++) { // Loop through values 0 to 10
+                cards.add(new Card(color, value));
+            }
+        }
+    }
+
+    public void shuffleDeck () { // Shuffle the deck
         Collections.shuffle(cards);
     }
 
-    public Card draw() { // draw card
+    public Card draw() { // Draw card from deck
         if (cardCount > 0 && isDrawable) {
             Card cardDrawn = cards.remove(0); // remove from top of the deck
             cardCount--;
