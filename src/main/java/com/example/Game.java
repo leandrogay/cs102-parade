@@ -23,7 +23,7 @@ public class Game {
         setTable();
     }
 
-    public void dealStartingHands() {
+    public void dealStartingHands() { // Distributes 5 cards to each player
         int cardsPerPlayer = 5;
 
         for (int i = 0; i < cardsPerPlayer; i++) { // Repeat 5 times
@@ -39,7 +39,7 @@ public class Game {
         }
     }
 
-    public void setTable() {
+    public void setTable() { // Draws and places 6 cards to the table/parade
         int cardsPerTable = 6;
 
         for (int i = 0; i < cardsPerTable; i++) {
