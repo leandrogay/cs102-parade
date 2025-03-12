@@ -101,5 +101,11 @@ public class Game {
         return false;
     }
 
+    public boolean checkLastRound() {
+        if (drawPileExhausted() || checkAllColors()) {
+            return true;
+        }
+        return false;
+    }
 
 }
