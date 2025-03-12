@@ -70,6 +70,7 @@ public class Game {
     //     // value.
     // }
 
+
     public ArrayList<Player> getPlayers() {
         return players;
     }
@@ -84,4 +85,12 @@ public class Game {
         return scores;
     }
 
+    public boolean drawPileExhausted() {
+        if (deck.getCardCount() == 0 ) { // deck is exhausted
+            return true;
+        }
+        return false;
+    }
+
+    
 }
