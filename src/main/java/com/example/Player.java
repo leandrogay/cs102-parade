@@ -2,8 +2,8 @@ import java.util.*;
 
 public class Player {
     private String playerName;
-    private List<Card> playerHand = new ArrayList<>();
-    private List<Card> collectedCards = new ArrayList<>();
+    private ArrayList<Card> playerHand = new ArrayList<>();
+    private ArrayList<Card> collectedCards = new ArrayList<>();
     private int score;
 
     public Player(String playerName) {
@@ -20,6 +20,18 @@ public class Player {
 
     public String getName() {
         return playerName;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public ArrayList<Card> getPlayerHand() {
+        return playerHand;
+    }
+
+    public ArrayList<Card> getCollectedCards() {
+        return collectedCards;
     }
 
     public int getScore() {
