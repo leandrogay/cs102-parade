@@ -86,10 +86,8 @@ public class Game {
     }
 
     public boolean drawPileExhausted() {
-        if (deck.getCardCount() == 0 ) { // deck is exhausted
-            return true;
-        }
-        return false;
+        // deck is exhausted
+        return deck.getCardCount() == 0;
     }
 
     public boolean checkAllColors() {
@@ -102,10 +100,8 @@ public class Game {
     }
 
     public boolean checkLastRound() {
-        if (drawPileExhausted() || checkAllColors()) { // if either of the conditions are fulfilled, the game ends
-            return true;
-        }
-        return false;
+        // if either of the conditions are fulfilled, the game ends
+        return drawPileExhausted() || checkAllColors();
     }
 
 }
