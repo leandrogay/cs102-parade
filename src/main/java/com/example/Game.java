@@ -102,7 +102,7 @@ public class Game {
     }
 
     public boolean checkLastRound() {
-        if (drawPileExhausted() || checkAllColors()) {
+        if (drawPileExhausted() || checkAllColors()) { // if either of the conditions are fulfilled, the game ends
             return true;
         }
         return false;
