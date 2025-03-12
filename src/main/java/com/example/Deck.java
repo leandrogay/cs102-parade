@@ -35,6 +35,10 @@ public class Deck {
         }
     }
 
+    public ArrayList<Card> getDeck() {
+        return cards;
+    }
+
     public int getCardCount() { // get number of cards in deck 
         return cardCount;
     }
