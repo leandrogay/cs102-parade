@@ -4,6 +4,7 @@ import java.util.Collections;
 public class Deck {
     private ArrayList<Card> cards;
     private int cardCount;
+    private boolean isDrawable = true;
 
     public Deck(ArrayList<Card> initialCards) { // initialCards -> before any changes are made
         this.cards = new ArrayList<>(initialCards);
@@ -15,7 +16,7 @@ public class Deck {
     }
 
     public Card draw() { // draw card
-        if (cardCount > 0) {
+        if (cardCount > 0 && isDrawable) {
             Card cardDrawn = cards.remove(0); // remove from top of the deck
             cardCount--;
             return cardDrawn;
@@ -26,6 +27,14 @@ public class Deck {
 
     public int getCardCount() { // get number of cards in deck 
         return cardCount;
+    }
+
+    public boolean isDrawable() {
+        return isDrawable;
+    }
+
+    public void setDrawable(boolean isDrawable) {
+        this.isDrawable = isDrawable;
     }
 
     // @Override
