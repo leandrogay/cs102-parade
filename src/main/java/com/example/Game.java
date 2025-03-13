@@ -95,7 +95,6 @@ public class Game {
         });
         return color_majority_map;
     }
-g
 
     public ArrayList<Player> getPlayers() {
         return players;
