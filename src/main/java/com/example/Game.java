@@ -1,4 +1,3 @@
-import com.sun.jdi.Value;
 import java.util.*;
 
 public class Game {
@@ -78,9 +77,9 @@ public class Game {
     //     }   
     // }
     public HashMap<Card.Color, Integer> getMajorityOfEachCard() { // returns a map mapping each card to its majority holder number
-        HashMap<Card.Color, ArrayList<Integer>> color_result_map = new HashMap<Card.Color, ArrayList<Integer>>();
+        HashMap<Card.Color, ArrayList<Integer>> color_result_map = new HashMap<>();
         for (Card.Color color : Card.Color.values()) {
-            color_result_map.put(color, new ArrayList<Integer>());
+            color_result_map.put(color, new ArrayList<>());
             for (Player player : players) {
                 HashMap<Card.Color, Integer> player_collection = player.getCardCollection();
                 if (player_collection.containsKey(color)) { // player collection possesses a card of that color
@@ -88,7 +87,7 @@ public class Game {
                 }
             }
         }
-        HashMap<Card.Color, Integer> color_majority_map = new HashMap<Card.Color, Integer>();
+        HashMap<Card.Color, Integer> color_majority_map = new HashMap<>();
         color_result_map.forEach((color, color_num_array) -> {
             Integer max_color = Collections.max(color_num_array);
             color_majority_map.put(color, max_color);
@@ -104,7 +103,7 @@ public class Game {
         List<Integer> scores = new ArrayList<>();
 
         for (Player player : players) {
-            scores.add(calculateScore(player));
+            // scores.add(calculateScore(player));
         }
 
         return scores;

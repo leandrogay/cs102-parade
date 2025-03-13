@@ -43,7 +43,8 @@ public class Player {
     }
 
     public int getNumColors() { // return the number of colors in collected hand
-        ArrayList<Card.Color> check_colors = new ArrayList<Card.Color>();
+        ArrayList<Card.Color> check_colors;
+        check_colors = new ArrayList<>();
         for (Card card : collectedCards) {
             if (!check_colors.contains(card.getColor())) {
                 check_colors.add(card.getColor());
@@ -53,7 +54,7 @@ public class Player {
     }
 
     public HashMap<Card.Color, Integer> getCardCollection() { // return a mapping of color player obtained with the number of cards of that color
-        HashMap<Card.Color, Integer> card_map = new HashMap<Card.Color, Integer>();
+        HashMap<Card.Color, Integer> card_map = new HashMap<>();
         for (Card card : collectedCards) {
             Card.Color card_color= card.getColor();
             if (!card_map.containsKey(card_color)) {
@@ -63,5 +64,19 @@ public class Player {
             }
         }
         return card_map;
+    }
+
+    public ArrayList<Card.Color> getFlippedCardsColor(HashMap<Card.Color, Integer> majority_card_map) {
+        HashMap<Card.Color, Integer> personal_collection_map = getCardCollection();
+        ArrayList<Card.Color> flipped_cards = new ArrayList<>();
+        personal_collection_map.forEach((color, num_cards) -> {
+            if (majority_card_map.containsKey(color)) {
+                Integer max_num_color = majority_card_map.get(color);
+                if (Objects.equals(max_num_color, num_cards)) { // is the max 
+                    flipped_cards.add(color);
+                }
+            }
+        });
+        return flipped_cards;
     }
 }
