@@ -43,12 +43,25 @@ public class Player {
     }
 
     public int getNumColors() { // return the number of colors in collected hand
-        ArrayList<Color> check_colors = new ArrayList<Color>();
+        ArrayList<Card.Color> check_colors = new ArrayList<Card.Color>();
         for (Card card : collectedCards) {
             if (!check_colors.contains(card.getColor())) {
                 check_colors.add(card.getColor());
             }
         }
         return check_colors.size();
+    }
+
+    public HashMap<Card.Color, Integer> getCardCollection() { // return a mapping of color player obtained with the number of cards of that color
+        HashMap<Card.Color, Integer> card_map = new HashMap<Card.Color, Integer>();
+        for (Card card : collectedCards) {
+            Card.Color card_color= card.getColor();
+            if (!card_map.containsKey(card_color)) {
+                card_map.put(card_color, 0);
+            } else {
+                card_map.put(card_color, card_map.getOrDefault(card_color, 0) + 1);
+            }
+        }
+        return card_map;
     }
 }

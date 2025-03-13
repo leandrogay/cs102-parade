@@ -69,6 +69,13 @@ public class Game {
     //     // face down cards will now be scored as +1, and faceup cards will be their
     //     // value.
     // }
+    // public HashMap<Color, Integer> getMajorityOfEachCard() {
+    //     HashMap<Color, ArrayList<Integer>> color_result_map = new HashMap<Color, ArrayList<Integer>>();
+    //     for (Player player : players) {
+    //         ArrayList<Card> collected_cards = player.getCollectedCards();
+
+    //     }
+    // }
 
 
     public ArrayList<Player> getPlayers() {
