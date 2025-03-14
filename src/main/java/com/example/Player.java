@@ -38,8 +38,16 @@ public class Player {
         return score;
     }
 
-    public int calculateScore() {
-        return 0;
+    public void calculateScore(HashMap<Card.Color, Integer> majority_card_map) {
+        score = 0; // reset score
+        ArrayList<Card.Color> flippedCards = getFlippedCardsColor(majority_card_map);
+        for (Card card : collectedCards) {
+            if (flippedCards.contains(card.getColor())) { // the card is flipped down -> score +1
+                score += 1;
+            } else { // card is flipped up -> score +num on card
+                score += card.getValue();
+            }
+        } 
     }
 
     public int getNumColors() { // return the number of colors in collected hand
@@ -66,7 +74,7 @@ public class Player {
         return card_map;
     }
 
-    public ArrayList<Card.Color> getFlippedCardsColor(HashMap<Card.Color, Integer> majority_card_map) {
+    public ArrayList<Card.Color> getFlippedCardsColor(HashMap<Card.Color, Integer> majority_card_map) { // retrieve majority_card_map from getMajorityOfEachCard() in Game class
         HashMap<Card.Color, Integer> personal_collection_map = getCardCollection();
         ArrayList<Card.Color> flipped_cards = new ArrayList<>();
         personal_collection_map.forEach((color, num_cards) -> {
