@@ -32,5 +32,13 @@ public class Table{
 
     }
 
+    public void changeDirection() {
+        if (direction == Direction.LEFT_TO_RIGHT){
+            direction = Direction.RIGHT_TO_LEFT;
+        } else{
+            direction = Direction.LEFT_TO_RIGHT;
+        }
+    }
+
 
 }
