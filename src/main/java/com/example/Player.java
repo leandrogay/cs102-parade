@@ -27,6 +27,7 @@ public class Player {
     }
 
     public ArrayList<Card> getPlayerHand() {
+        Collections.sort(playerHand, new CardComparator());
         return playerHand;
     }
 
