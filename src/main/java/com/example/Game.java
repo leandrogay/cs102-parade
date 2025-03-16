@@ -133,4 +133,28 @@ public class Game {
         return drawPileExhausted() || checkAllColors();
     }
 
+    public void collectCardsFromParade(Player player, Card playedCard){
+        // Changed direction to make it easier for removal condition.
+        table.changeDirection();
+
+        ArrayList<Card> parade = table.getParade();
+        ArrayList<Card> cardsToCollect = new ArrayList<>();
+        for (int i = playedCard.getValue() - 1; i < parade.size(); i++){ // since we have to skip n (played cards value) number of cards
+            Card c = parade.get(i);
+            if (c.getColor() == playedCard.getColor() || c.getValue() <= playedCard.getValue()) {
+                cardsToCollect.add(c);
+            }
+        }
+
+
+        for (Card c : cardsToCollect){
+            player.collectCard(c);
+            table.removeCard(c);
+        }
+
+
+
+        System.out.println(player.getName() + " collected: " + cardsToCollect);
+    }
+
 }
