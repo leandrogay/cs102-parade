@@ -40,9 +40,14 @@ public class Player {
     }
 
     // condition for if there are > 2 players
-    public void calculateScore(HashMap<Card.Color, Integer> majority_card_map) {
+    public void calculateScore(HashMap<Card.Color, Integer> majority_card_map, boolean is2Players) {
         score = 0; // reset score
-        ArrayList<Card.Color> flippedCards = getFlippedCardsColor(majority_card_map);
+        ArrayList<Card.Color> flippedCards;
+        if (is2Players) {
+            flippedCards = getFlippedCardsColor2Players(majority_card_map);
+        } else {
+            flippedCards = getFlippedCardsColorManyPlayers(majority_card_map);
+        }
         for (Card card : collectedCards) {
             if (flippedCards.contains(card.getColor())) { // the card is flipped down -> score +1
                 score += 1;
