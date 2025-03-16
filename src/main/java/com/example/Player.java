@@ -52,6 +52,7 @@ public class Player {
         } 
     }
 
+
     public int getNumColors() { // return the number of colors in collected hand
         ArrayList<Card.Color> check_colors;
         check_colors = new ArrayList<>();
@@ -76,8 +77,8 @@ public class Player {
         return card_map;
     }
 
-    // ONLY FOR WHEN THERE ARE > 2 PLAYERS
-    public ArrayList<Card.Color> getFlippedCardsColor(HashMap<Card.Color, Integer> majority_card_map) { // retrieve majority_card_map from getMajorityOfEachCard() in Game class
+    // FOR WHEN THERE ARE > 2 PLAYERS
+    public ArrayList<Card.Color> getFlippedCardsColorManyPlayers(HashMap<Card.Color, Integer> majority_card_map) { // retrieve majority_card_map from getMajorityOfEachCard() in Game class
         HashMap<Card.Color, Integer> personal_collection_map = getCardCollection();
         ArrayList<Card.Color> flipped_cards = new ArrayList<>();
         personal_collection_map.forEach((color, num_cards) -> {
@@ -86,6 +87,25 @@ public class Player {
                 if (Objects.equals(max_num_color, num_cards)) { // is the max 
                     flipped_cards.add(color);
                 }
+            }
+        });
+        return flipped_cards;
+    }
+
+    // FOR WHEN THERE ARE 2 PLAYERS
+    public ArrayList<Card.Color> getFlippedCardsColor2Players(HashMap<Card.Color, Integer> opp_card_collection) { // retrieve opponent's card collection in Game class if possible
+        HashMap<Card.Color, Integer> personal_collection_map = getCardCollection();
+        ArrayList<Card.Color> flipped_cards = new ArrayList<>();
+        personal_collection_map.forEach((color, num_cards) -> {
+            if (opp_card_collection.containsKey(color)) { // opponent's hand also possess the card that player has
+                Integer opp_num_cards = opp_card_collection.get(color);
+                if (num_cards > opp_num_cards) { // player's card hand is more than opponent's
+                    if (num_cards - opp_num_cards >= 2) { // player has majority in this case
+                        flipped_cards.add(color);
+                    }
+                }
+            } else { // opponent do not possess that hand, player automatically has majority
+                flipped_cards.add(color);
             }
         });
         return flipped_cards;
