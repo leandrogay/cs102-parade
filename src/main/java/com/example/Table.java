@@ -40,5 +40,10 @@ public class Table{
         }
     }
 
+    public void removeCard(Card c){
+        if (parade.contains(c)){
+            parade.remove(c);
+        }
+    }
 
 }
