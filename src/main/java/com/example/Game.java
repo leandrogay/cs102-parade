@@ -4,6 +4,7 @@ public class Game {
     private Deck deck;
     private Table table;
     private int playerNumber;
+    private boolean is2Players;
     private ArrayList<Player> players = new ArrayList<>();
 
     public Game(int playerNumber) {
@@ -59,6 +60,10 @@ public class Game {
 
     public ArrayList<Card> getParade() {
         return table.getParade();
+    }
+
+    public boolean getIs2Players() {
+        return is2Players;
     }
 
     // public int calculateScore(Player player) {
