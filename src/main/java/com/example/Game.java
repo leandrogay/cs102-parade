@@ -146,13 +146,18 @@ public class Game {
             }
         }
 
-
         for (Card c : cardsToCollect){
             player.collectCard(c);
             table.removeCard(c);
         }
 
+        //sets the direction back to LEFT_TO_RIGHT and adds the played card to the parade
+        table.changeDirection();
+        table.addCardToParade(playedCard);
 
+        Card drawnCard = deck.draw();
+        // player draws card after end of turn (should i use the addToHand method or collectCard method for this)
+        player.addToHand(drawnCard);
 
         System.out.println(player.getName() + " collected: " + cardsToCollect);
     }
