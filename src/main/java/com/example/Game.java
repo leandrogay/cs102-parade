@@ -1,3 +1,4 @@
+import com.sun.source.util.SimpleDocTreeVisitor;
 import java.util.*;
 
 public class Game {
@@ -108,7 +109,7 @@ public class Game {
         List<Integer> scores = new ArrayList<>();
 
         for (Player player : players) {
-            // scores.add(calculateScore(player));
+            scores.add(player.getScore());
         }
 
         return scores;
