@@ -14,6 +14,20 @@ public class Player {
         playerHand.add(card);
     }
 
+    public void removeFromHand(Card card) {
+
+        for (Card c : playerHand) {
+            if (c.equals(card)) {
+                playerHand.remove(c);
+                System.out.println(c + " removed from hand");
+                return;
+            }
+        }
+
+        System.out.println("Card not removed");
+    
+    }
+
     public void collectCard(Card card) {
         collectedCards.add(card);
     }

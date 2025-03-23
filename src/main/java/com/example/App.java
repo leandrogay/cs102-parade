@@ -27,24 +27,19 @@ public class App {
             // }
             //
 
-            int currPlayerIndex = 0;
             while (!game.checkLastRound()) {
-                for (int i = 0 ; i < players.size() ; i++) {
-                    // 1. Display the current table ()
-                    // 2. Display player collection
-                    // 3. Display player hand
-                    // 4. Prompt for input
-                    // 5. Put card - follow up with the logic
-                    // 6. Provide feedback - "Cards collected: 1red, 7blue, 8yellow"
-                    // 7. Current deck count
-
-                    currPlayerIndex = i;
-                }
+                game.conductRound();
+                break;
             }
 
             // one more round
             // 1. Notify that it is the last round - ""
             // 2. repeat contents of for loop 
+
+            game.conductRound();
+            
+
+            //tabulate scores and stuff and print winner
             
         }  
     }

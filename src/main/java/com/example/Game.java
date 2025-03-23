@@ -1,4 +1,3 @@
-import com.sun.source.util.SimpleDocTreeVisitor;
 import java.util.*;
 
 public class Game {
@@ -196,4 +195,140 @@ public class Game {
         return winners;
     } */
 
+
+
+    public void conductRound() {
+        for (int currPlayerIndex  = 0; currPlayerIndex < players.size(); currPlayerIndex ++) {
+            
+            //set currPlayer to i so that it can rotate between players
+        
+            Player currentPlayer = players.get(currPlayerIndex);
+
+            System.out.println("Current Player: Player " + currentPlayer.getName());
+
+        
+            // 1. Display the current table () DONE
+            // 2. Display player collection DONE
+            // 3. Display player hand DONE
+
+            this.displayTable();
+            this.displayCollected(currentPlayer);
+            this.displayHand(currentPlayer);
+
+        // 4. Prompt for input EXCEPTION TBD
+
+        System.out.println("Enter card to put (color, then value): ");
+
+        Scanner inputScanner = new Scanner(System.in);
+
+        String cardString = inputScanner.nextLine(); //Invalid Card exception put here
+
+        //convert cardString to card
+
+        Card cardPlaced = this.convertCard(cardString);
+
+        currentPlayer.removeFromHand(cardPlaced);
+
+        
+        // 5. Put card - follow up with the logic
+
+        System.out.println("Card placed is " + cardPlaced);
+
+        table.updateParade(cardPlaced, currentPlayer);
+
+
+        // 6. Provide feedback - "Cards collected: 1red, 7blue, 8yellow" DONE
+
+        this.displayCollected(currentPlayer);
+
+        this.displayTable();
+
+        //Draw card for player DONE
+
+        Card drawnCard = deck.draw();
+
+        if (drawnCard != null) {
+            currentPlayer.addToHand(drawnCard);
+        } else {
+            System.out.println("Deck ran out of cards!");
+            return; // Stop dealing if the deck is empty
+        }
+
+        // 7. Current deck count
+        
+        System.out.println("Current deck count is " + deck.getCardCount());
+
+
+        //Wait for key
+        System.out.println("Press Enter to continue to the next turn...");
+        inputScanner.nextLine(); // Wait for Enter key
+
+
+        } //end of each iteration
+    }
+
+    //Helper functions
+
+    public void displayTable() {
+
+        System.out.println("Current Table");
+
+        ArrayList<Card> tableCards = table.getParade();
+        int position = 1;
+        for (Card card : tableCards) {
+            System.out.printf("%d: ", position);
+            position++;
+            System.out.println(card);
+        }
+
+        System.out.println("==============");
+
+    }
+
+    public void displayHand(Player player) {
+
+        System.out.println("Current Hand");
+
+        for (Card card : player.getPlayerHand()) {
+            System.out.println(card);
+        }
+
+        System.out.println("==============");
+
+    }
+
+    public void displayCollected(Player player) {
+
+        if (player.getCardCollection().isEmpty()) {
+            System.out.println("Card Collection is Empty");
+            System.out.println("==============");
+            return;
+        }
+
+        System.out.println("Current Collection");
+
+        for (Card card : player.getCollectedCards()) {
+            System.out.println(card);
+        }
+        System.out.println("==============");
+
+    }
+
+    public Card convertCard(String cardString) {
+        try {
+            String[] parts = cardString.trim().split("\\s+"); 
+            if (parts.length != 2) {
+                throw new IllegalArgumentException("Invalid card format. Use 'COLOR VALUE' (e.g., 'RED 5').");
+            }
+    
+            Card.Color color = Card.Color.valueOf(parts[0].toUpperCase());
+    
+            int value = Integer.parseInt(parts[1]);
+    
+            return new Card(color, value);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        }
+    }
 }

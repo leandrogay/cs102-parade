@@ -21,4 +21,13 @@ public class Card {
     public String toString() {
         return color + ": " + value;
     }
+
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Card card = (Card) obj;
+        return value == card.value && color == card.color;
+    }
+
+
 }

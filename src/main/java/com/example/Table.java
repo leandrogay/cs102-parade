@@ -46,4 +46,69 @@ public class Table{
         }
     }
 
+
+    public void updateParade(Card cardPlaced, Player currentPlayer) {
+
+        if (cardPlaced == null) {
+            System.out.println("Error: No card placed.");
+            return;
+        }
+
+        int oldParadeSize = parade.size();
+
+        parade.add(cardPlaced);
+
+
+        if (cardPlaced.getValue() == 0) {
+            removeCards(0, cardPlaced, currentPlayer);
+            return;
+        }
+
+        if (cardPlaced.getValue() >= oldParadeSize) {
+            return;
+        }
+
+
+        this.removeCards(cardPlaced.getValue(), cardPlaced, currentPlayer);
+
+        /*
+         * 1. Compare cardPlaced value with current number of cards.
+         *  2. if cardPlaced value is 0, all cards enter removal.
+         * if cardPlaced value is less than or equal to number of cards,
+         * no need do anything, return.
+         * if cardPlaced value is more than the number of cards,
+         * removeCards();
+         * update players card collection
+         * move up the cards in parade.
+         */
+
+         parade = new ArrayList<>(parade); // Rebuild list to maintain order
+
+    }
+
+    public void removeCards(int cardValue, Card cardPlaced, Player currentPlayer) {
+        List<Card> removalPile = new ArrayList<>();
+
+        //starts at parade.size() - 2 because last index is parade.size() - 1, and minus another one because you exclude the just added card.
+        for (int i = parade.size() - 2; i >= 0; i--) {
+            Card currentCard = parade.get(i);
+            //remove card with same color, and cards with value less than or equal to value of played card.card
+            if (currentCard.getColor() == cardPlaced.getColor() || currentCard.getValue() <= cardPlaced.getValue()) {
+                removalPile.add(currentCard);
+            } 
+        }
+
+
+        //remove all the cards in removal pile.
+        for (Card toRemoveCard : removalPile) {
+            currentPlayer.collectCard(toRemoveCard);
+            this.removeCard(toRemoveCard);
+        }
+
+        System.out.println("Cards removed are: " + removalPile);
+
+
+
+    }
+
 }
