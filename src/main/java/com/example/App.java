@@ -49,6 +49,7 @@ public class App {
             //print out each collection and hand
 
             for (Player p : players) {
+                System.out.println("score for " + p.getName() + " is " + p.getScore());
                 game.displayCollected(p);
 
             }

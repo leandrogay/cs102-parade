@@ -35,7 +35,7 @@ public class Table{
     public void changeDirection() {
         if (direction == Direction.LEFT_TO_RIGHT){
             direction = Direction.RIGHT_TO_LEFT;
-        } else{
+        } else {
             direction = Direction.LEFT_TO_RIGHT;
         }
     }
@@ -93,7 +93,7 @@ public class Table{
         for (int i = parade.size() - 2; i >= 0; i--) {
             Card currentCard = parade.get(i);
             //remove card with same color, and cards with value less than or equal to value of played card.card
-            if (currentCard.getColor() == cardPlaced.getColor() || currentCard.getValue() <= cardPlaced.getValue()) {
+            if (this.checkRemovalCondition(currentCard, cardPlaced)) {
                 removalPile.add(currentCard);
             } 
         }
@@ -109,6 +109,14 @@ public class Table{
 
 
 
+    }
+
+    public boolean checkRemovalCondition(Card currentCard, Card cardPlaced) {
+        if (currentCard.getColor() == cardPlaced.getColor() || currentCard.getValue() <= cardPlaced.getValue()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

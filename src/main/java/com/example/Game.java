@@ -163,16 +163,18 @@ public class Game {
     }
 
     public ArrayList<Player> getWinner(){
-        int highestScore = 0;
+        int lowestScore = Integer.MAX_VALUE;
+
         ArrayList<Player> winners = new ArrayList<>();
         for (Player p : players){
-            if (p.getScore() > highestScore){
-                highestScore = p.getScore();
+            if (p.getScore() < lowestScore){
+                lowestScore = p.getScore();
             }
         }
 
         for (Player p : players){
-            if (p.getScore() == highestScore){
+            System.out.println("Player score for " + p.getName()  + " is " + p.getScore());
+            if (p.getScore() == lowestScore){
                 winners.add(p);
             }
         }
@@ -307,7 +309,7 @@ public class Game {
     public void displayCollected(Player player) {
 
         if (player.getCardCollection().isEmpty()) {
-            System.out.println("Card Collection is Empty");
+            System.out.println("Card Collection is empty for " + player.getName());
             System.out.println("==============");
             return;
         }
@@ -376,6 +378,13 @@ public class Game {
             }
 
             this.displayCollected(currentPlayer);
+
+
+            //calculate the sccores
+            HashMap<Card.Color, Integer> playerCardMap = currentPlayer.getCardCollection();
+            currentPlayer.calculateScore(playerCardMap, is2Players);
+
+
 
         }
     }
