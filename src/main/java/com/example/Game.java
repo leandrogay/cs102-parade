@@ -200,6 +200,12 @@ public class Game {
     public void conductRound() {
         for (int currPlayerIndex  = 0; currPlayerIndex < players.size(); currPlayerIndex ++) {
             
+            boolean isLastRound = this.checkLastRound();
+
+            if (isLastRound) {
+                System.out.println("====LAST ROUND====");
+            }
+
             //set currPlayer to i so that it can rotate between players
         
             Player currentPlayer = players.get(currPlayerIndex);
@@ -243,21 +249,22 @@ public class Game {
 
         this.displayTable();
 
-        //Draw card for player DONE
+        //Draw card for player if not last round
+        if (!isLastRound) {
+            Card drawnCard = deck.draw();
 
-        Card drawnCard = deck.draw();
-
-        if (drawnCard != null) {
-            currentPlayer.addToHand(drawnCard);
-        } else {
-            System.out.println("Deck ran out of cards!");
-            return; // Stop dealing if the deck is empty
+            if (drawnCard != null) {
+                currentPlayer.addToHand(drawnCard);
+            } else {
+                System.out.println("Deck ran out of cards!");
+                return; // Stop dealing if the deck is empty
+            }
+    
+            // 7. Current deck count
+            
+            System.out.println("Current deck count is " + deck.getCardCount());
+    
         }
-
-        // 7. Current deck count
-        
-        System.out.println("Current deck count is " + deck.getCardCount());
-
 
         //Wait for key
         System.out.println("Press Enter to continue to the next turn...");
@@ -287,7 +294,7 @@ public class Game {
 
     public void displayHand(Player player) {
 
-        System.out.println("Current Hand");
+        System.out.println("Current Hand: " + player.getName());
 
         for (Card card : player.getPlayerHand()) {
             System.out.println(card);
@@ -305,7 +312,8 @@ public class Game {
             return;
         }
 
-        System.out.println("Current Collection");
+        System.out.println("Current Collection: " + player.getName());
+
 
         for (Card card : player.getCollectedCards()) {
             System.out.println(card);
@@ -329,6 +337,46 @@ public class Game {
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
             return null;
+        }
+    }
+
+
+    public void conductScoringRound() {
+        // first prompt the user to discard two cards
+        for (int currPlayerIndex  = 0; currPlayerIndex < players.size(); currPlayerIndex ++) {
+            
+            //set currPlayer to i so that it can rotate between players
+        
+            Player currentPlayer = players.get(currPlayerIndex);
+
+            //prompt user to discard 2 cards, then display the remaining cards, and the updated collection of the player.
+            Scanner sc = new Scanner(System.in);
+
+            this.displayHand(currentPlayer);
+
+            System.out.println("Enter first card to be discard for Player " + currentPlayer.getName());
+            String firstCardString = sc.nextLine();
+
+            System.out.println("Enter Second card to be discard for Player " + currentPlayer.getName());
+            String secondCardString = sc.nextLine();
+            
+            //INPUT EXCEPTIONS HERE TBD
+
+            Card firstCardDiscarded = this.convertCard(firstCardString);
+
+            Card secondCardDiscarded = this.convertCard(secondCardString);
+
+            currentPlayer.removeFromHand(firstCardDiscarded);
+            currentPlayer.removeFromHand(secondCardDiscarded);
+
+            //add rest to the collection
+            
+            for (Card remainingCards : currentPlayer.getPlayerHand()) {
+                currentPlayer.collectCard(remainingCards);
+            }
+
+            this.displayCollected(currentPlayer);
+
         }
     }
 }

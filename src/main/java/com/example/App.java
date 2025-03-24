@@ -6,9 +6,7 @@ public class App {
         System.out.print("Enter number of players: ");
         int playerCount = sc.nextInt();
         if (playerCount >= 2 && playerCount <= 6) { // exception needed temp for now
-            Game game = new Game(playerCount);
-            ArrayList<Player> players = game.getPlayers();
-            
+            Game game = new Game(playerCount);            
 
             // System.out.println("Display Table");
             // System.out.println("=============");
@@ -37,9 +35,34 @@ public class App {
             // 2. repeat contents of for loop 
 
             game.conductRound();
+
+
+            //this is the round where the player chooses to discard 2, and place 2
+            game.conductScoringRound();
             
 
             //tabulate scores and stuff and print winner
+
+            //print winner
+            ArrayList<Player> players = game.getPlayers();
+
+            //print out each collection and hand
+
+            for (Player p : players) {
+                game.displayCollected(p);
+
+            }
+
+
+            ArrayList<Player> winners = game.getWinner();
+
+            System.out.println("WINNERS: ");
+
+            for (Player winner : winners) {
+                System.out.println(winner.getName());
+            }
+            
+            
             
         }  
     }
