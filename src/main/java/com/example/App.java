@@ -33,11 +33,12 @@ public class App {
             // one more round
             // 1. Notify that it is the last round - ""
             // 2. repeat contents of for loop 
-
+            System.out.println("=====LAST ROUND=====");
             game.conductRound();
 
 
             //this is the round where the player chooses to discard 2, and place 2
+
             game.conductScoringRound();
             
 
@@ -48,6 +49,9 @@ public class App {
 
             //print out each collection and hand
 
+            System.out.println("=====SCORES=====");
+
+
             for (Player p : players) {
                 System.out.println("score for " + p.getName() + " is " + p.getScore());
                 game.displayCollected(p);
@@ -55,8 +59,9 @@ public class App {
             }
 
 
-            ArrayList<Player> winners = game.getWinner();
 
+            ArrayList<Player> winners = game.getWinner();
+            System.out.println("=====WINNERS=====");
             System.out.println("WINNERS: ");
 
             for (Player winner : winners) {

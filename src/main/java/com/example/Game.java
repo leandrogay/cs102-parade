@@ -351,6 +351,8 @@ public class Game {
         
             Player currentPlayer = players.get(currPlayerIndex);
 
+            System.out.println("=====DISCARD TWO CARDS=====");
+
             //prompt user to discard 2 cards, then display the remaining cards, and the updated collection of the player.
             Scanner sc = new Scanner(System.in);
 
