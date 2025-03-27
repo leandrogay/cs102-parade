@@ -25,10 +25,13 @@ public class App {
             // }
             //
 
+
             while (!game.checkLastRound()) {
-                game.conductRound();
-                break;
+                game.conductRound(); // conduct round while not last round 
             }
+
+            game.conductScoringRound(); // for scoring
+
 
             // one more round
             // 1. Notify that it is the last round - ""

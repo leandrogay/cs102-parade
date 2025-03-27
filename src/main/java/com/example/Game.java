@@ -17,7 +17,17 @@ public class Game {
         for (int i = 0; i < this.playerNumber; i++) {
             System.out.print("Enter name for Player " + (i + 1) + ": ");
             String name = sc.nextLine();
-            players.add(new Player(name));
+            // nee testing
+            if (name.equalsIgnoreCase("bot")) {
+                players.add(new BotPlayer("BotPlayer" + (i + 1)));
+            } else {
+                players.add(new Player(name));
+            }
+            // nee testing end 
+
+            // og code
+            // players.add(new Player(name));
+            // og code end
         }
 
         dealStartingHands();
@@ -139,7 +149,12 @@ public class Game {
 
         ArrayList<Card> parade = table.getParade();
         ArrayList<Card> cardsToCollect = new ArrayList<>();
-        for (int i = playedCard.getValue() - 1; i < parade.size(); i++){ // since we have to skip n (played cards value) number of cards
+
+        int startIndex = Math.max(0, playedCard.getValue() - 1);
+        for (int i = startIndex; i < parade.size(); i++){
+
+        //for (int i = playedCard.getValue() - 1; i < parade.size(); i++){ // since we have to skip n (played cards value) number of cards
+        
             Card c = parade.get(i);
             if (c.getColor() == playedCard.getColor() || c.getValue() <= playedCard.getValue()) {
                 cardsToCollect.add(c);
@@ -223,25 +238,23 @@ public class Game {
             this.displayCollected(currentPlayer);
             this.displayHand(currentPlayer);
 
-        // 4. Prompt for input EXCEPTION TBD
+        // 4. Prompt for input EXCEPTION TBD // added option to play with bot 
 
-        System.out.println("Enter card to put (color, then value): ");
-
+        Card cardPlaced;
         Scanner inputScanner = new Scanner(System.in);
-
-        String cardString = inputScanner.nextLine(); //Invalid Card exception put here
-
-        //convert cardString to card
-
-        Card cardPlaced = this.convertCard(cardString);
-
-        currentPlayer.removeFromHand(cardPlaced);
-
         
-        // 5. Put card - follow up with the logic
+        if (currentPlayer instanceof BotPlayer) {  // instantiate bot player 
+            cardPlaced = ((BotPlayer) currentPlayer).cardToPlay(table.getParade());
+            currentPlayer.removeFromHand(cardPlaced);
+            System.out.println("Bot " + currentPlayer.getName() + " played: " + cardPlaced);
+        } else {
+            System.out.println("Enter card to put (color, then value): ");
+            String cardString = inputScanner.nextLine();
+            cardPlaced = this.convertCard(cardString);
+            currentPlayer.removeFromHand(cardPlaced);
+        }
 
         System.out.println("Card placed is " + cardPlaced);
-
         table.updateParade(cardPlaced, currentPlayer);
 
 
