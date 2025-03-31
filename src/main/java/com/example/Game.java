@@ -351,7 +351,7 @@ public class Game {
         try {
             String[] parts = cardString.trim().split("\\s+");
             if (parts.length != 2) {
-                throw new IllegalArgumentException("Invalid card format. Use 'COLOR VALUE' (e.g., 'RED 5').");
+                return null;
             }
 
             Card.Color color = Card.Color.valueOf(parts[0].toUpperCase());
@@ -360,7 +360,6 @@ public class Game {
 
             return new Card(color, value);
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
             return null;
         }
     }
@@ -417,17 +416,8 @@ public class Game {
             throw new CardException("Invalid card!");
         }
 
-        if (cardPlaced.getColor() == null) {
-            throw new CardException("Invalid card color!");
-        }
-
         if (cardPlaced.getValue() < 0 || cardPlaced.getValue() > 10) {
             throw new CardException("Invalid card value! Must be between 0 and 10.");
-        }
-
-        if (!EnumSet.of(Card.Color.RED, Card.Color.BLUE, Card.Color.GREEN, Card.Color.YELLOW, Card.Color.PURPLE,
-                Card.Color.BLACK).contains(cardPlaced.getColor())) {
-            throw new CardException("Invalid card color! Must be one of RED, BLUE, GREEN, YELLOW, PURPLE, BLACK.");
         }
 
         if (!currentPlayer.getPlayerHand().contains(cardPlaced)) {
