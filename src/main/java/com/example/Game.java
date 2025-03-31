@@ -295,7 +295,7 @@ public class Game {
         printDivider("COLLECTION");
 
         if (player.getCardCollection().isEmpty()) {
-            System.out.println("Card Collection is empty for " + player.getName());
+            System.out.println("*collection is empty for " + player.getName() + "*");
             printDivider(null);
             return;
         }

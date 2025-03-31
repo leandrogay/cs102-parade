@@ -9,9 +9,12 @@ public class App {
         System.out.println();
         if (playerCount >= 2 && playerCount <= 6) { // exception needed temp for now
             Game game = new Game(playerCount);
-
-            while (!game.checkLastRound()) {
+            int cheat = 0;
+            
+            while (cheat < 2) {
+            // while (!game.checkLastRound()) {
                 game.conductRound(); // conduct round while not last round 
+                cheat++;
             }
 
             game.conductScoringRound(); // for scoring
