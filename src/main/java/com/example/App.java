@@ -9,22 +9,21 @@ public class App {
         System.out.println();
         if (playerCount >= 2 && playerCount <= 6) { // exception needed temp for now
             Game game = new Game(playerCount);
-            int cheat = 0;
+            int cheat = 2;
             
-            while (cheat < 2) {
+            while (cheat > 0) {
             // while (!game.checkLastRound()) {
                 game.conductRound(); // conduct round while not last round 
-                cheat++;
+                cheat--;
             }
 
-            game.conductScoringRound(); // for scoring
+            // game.conductScoringRound(); // for scoring
 
             // one more round
             // 1. Notify that it is the last round - ""
             // 2. repeat contents of for loop 
             System.out.println("=====LAST ROUND=====");
             game.conductRound();
-
             //this is the round where the player chooses to discard 2, and place 2
             game.conductScoringRound();
 
