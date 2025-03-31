@@ -7,7 +7,7 @@ public class Game {
     private boolean is2Players;
     private ArrayList<Player> players = new ArrayList<>();
     private String divider = "===================================================================================";
-    private int delayDuration = 1800;
+    private int delayDuration = 1200;
 
     public Game(int playerNumber) {
         this.deck = new Deck();
@@ -253,16 +253,9 @@ public class Game {
                 }
 
                 // 7. Current deck count
-
                 System.out.println("Current deck count is " + deck.getCardCount());
-
             }
-
-            // Wait for key
-            System.out.println("Press Enter to continue to the next turn...");
-            inputScanner.nextLine(); // Wait for Enter key
-
-        } // end of each iteration
+        }
     }
 
     // Helper functions
@@ -332,7 +325,6 @@ public class Game {
                 System.out.println(sb.toString());
             }
         } else {
-            System.out.println(divider);
             System.out.println();
         }
     }
@@ -363,7 +355,7 @@ public class Game {
 
             Player currentPlayer = players.get(currPlayerIndex);
 
-            System.out.println("=====DISCARD TWO CARDS=====");
+            printDivider("DISCARD TWO CARDS");
 
             // prompt user to discard 2 cards, then display the remaining cards, and the
             // updated collection of the player.
