@@ -3,8 +3,10 @@ import java.util.*;
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        System.out.println();
         System.out.print("Enter number of players: ");
         int playerCount = sc.nextInt();
+        System.out.println();
         if (playerCount >= 2 && playerCount <= 6) { // exception needed temp for now
             Game game = new Game(playerCount);
 
