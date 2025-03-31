@@ -67,7 +67,7 @@ Our project uses Java programming to simulate the game's logic, allowing users t
 G2T4: 
 - GOH YANG JUN
 - SUNKARI SARASWATI NEEHARIKA
-- LEANDRO GAY
+- LEANDRO GAY (leandro.gay.2023@scis.smu.edu.sg)
 - LIM ZE YUEN
 - SIM KAY WEE
 - LIN KHANT PE THEIN
