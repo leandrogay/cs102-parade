@@ -12,11 +12,13 @@
 
 ## About The Project
 ---------------
-
+Parade Card game created using Java
 
 ### Introduction
 
-[Insert a brief description of your project here. What does it do? Why is it useful?]
+Welcome to G2T4's Java-based recreation of the popular card game Parade. In this game, players take turns adding cards to a parade line, with the goal of minimising the number of cards they collect. The game is set in a whimsical Wonderland where players aim to avoid accumulating points by strategically playing cards to remove others from the parade.
+
+Our project uses Java programming to simulate the game's logic, allowing users to experience the fun and strategic depth of Parade in a digital environment. This README will guide you through how to set up, play, and contribute to our version of the game.
 
 ### Features
 
@@ -37,13 +39,12 @@
 
 ### Installation
 
-1. **Step 1**: [First step in installing the project.]
-2. **Step 2**: [Second step in installing the project.]
-3. **Step 3**: [Third step in installing the project.]
+1. Run the Compile.bat located at: `specify directory`
+2. Wait for class files to compile
 
 ### Running the Project
 
-- [Instructions on how to run the project after installation.]
+1. Run the Run.bat located at: `specify directory` 
 
 ## Usage
 -----
