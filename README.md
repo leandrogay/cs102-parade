@@ -7,14 +7,12 @@
 1. [About The Project](#about-the-project)
 2. [Getting Started](#getting-started)
 3. [Usage](#usage)
-4. [Contributing](#contributing)
-5. [Roadmap](#roadmap)
-6. [License](#license)
-7. [Acknowledgments](#acknowledgments)
+7. [Contributors](#contributors)
 8. [Contact](#contact)
 
 ## About The Project
 ---------------
+
 
 ### Introduction
 
@@ -58,39 +56,23 @@
 
 - [Include any relevant screenshots or videos to illustrate usage.]
 
-## Contributing
-------------
-
-### How to Contribute
-
-1. **Fork the Repository**: [Instructions on how to fork the project.]
-2. **Create a Branch**: [Instructions on creating a branch for your changes.]
-3. **Submit a Pull Request**: [Instructions on submitting a pull request.]
 
 ### Reporting Issues
 
 - [Instructions on how to report bugs or issues.]
 
-## Roadmap
---------
-
-- [List future plans or features you intend to add.]
-
-## License
--------
-
-- [Specify the project's license.]
-
-## Acknowledgments
+## Contributors 
 --------------
-
-- [Acknowledge contributors or resources used.]
+G2T4: 
+- GOH YANG JUN
+- SUNKARI SARASWATI NEEHARIKA
+- LEANDRO GAY
+- LIM ZE YUEN
+- SIM KAY WEE
+- LIN KHANT PE THEIN
+ 
 
 ## Contact
 -------
-
-- **Author**: [Your Name]
-- **Email**: [Your Email]
-- **LinkedIn**: [Your LinkedIn Profile]
-- **GitHub**: [Your GitHub Profile]
+- **GitHub**: https://github.com/leandrogay/cs102-parade
 
