@@ -109,11 +109,11 @@ public class Game {
         }
         HashMap<Card.Color, Integer> color_majority_map = new HashMap<>();
         color_result_map.forEach((color, color_num_array) -> {
-            if (!color_num_array.isEmpty()) {  
+            if (!color_num_array.isEmpty()) {
                 Integer max_color = Collections.max(color_num_array);
                 color_majority_map.put(color, max_color);
             } else {
-                color_majority_map.put(color, 0); 
+                color_majority_map.put(color, 0);
             }
         });
         return color_majority_map;
@@ -222,7 +222,7 @@ public class Game {
             this.displayHand(currentPlayer);
 
             // 4. Prompt for input EXCEPTION TBD // added option to play with bot
-            Card cardPlaced;
+            Card cardPlaced = null;
             Scanner inputScanner = new Scanner(System.in);
 
             if (currentPlayer instanceof BotPlayer) { // instantiate bot player
@@ -230,10 +230,24 @@ public class Game {
                 currentPlayer.removeFromHand(cardPlaced);
                 System.out.println("Bot " + currentPlayer.getName() + " played: " + cardPlaced);
             } else {
-                System.out.println("Enter card to put (color, then value): ");
-                String cardString = inputScanner.nextLine();
-                cardPlaced = this.convertCard(cardString);
-                currentPlayer.removeFromHand(cardPlaced);
+                boolean validCard = false;
+
+                while (!validCard) { // Keep asking for a valid cardn
+                    try {
+
+                        System.out.println("Enter card to put (color, then value): ");
+                        String cardString = inputScanner.nextLine();
+                        cardPlaced = this.convertCard(cardString);
+
+                        if (this.checkValidCardPlacement(cardPlaced, currentPlayer)) {
+                            currentPlayer.removeFromHand(cardPlaced);
+                            validCard = true;
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                }
             }
 
             System.out.println("Card placed is " + cardPlaced);
@@ -313,7 +327,7 @@ public class Game {
             String paddedText = " " + text + " ";
             int textLength = paddedText.length();
             int padding = (dividerLength - textLength) / 2;
-    
+
             // Handle cases where the padded text length is greater than the divider length
             if (textLength > dividerLength) {
                 System.out.println(paddedText.substring(0, dividerLength));
@@ -395,5 +409,31 @@ public class Game {
             HashMap<Card.Color, Integer> majorityCardMap = getMajorityOfEachCard();
             currentPlayer.calculateScore(majorityCardMap, is2Players);
         }
+    }
+
+    public boolean checkValidCardPlacement(Card cardPlaced, Player currentPlayer) {
+
+        if (cardPlaced == null) {
+            throw new CardException("Invalid card!");
+        }
+
+        if (cardPlaced.getColor() == null) {
+            throw new CardException("Invalid card color!");
+        }
+
+        if (cardPlaced.getValue() < 0 || cardPlaced.getValue() > 10) {
+            throw new CardException("Invalid card value! Must be between 0 and 10.");
+        }
+
+        if (!EnumSet.of(Card.Color.RED, Card.Color.BLUE, Card.Color.GREEN, Card.Color.YELLOW, Card.Color.PURPLE,
+                Card.Color.BLACK).contains(cardPlaced.getColor())) {
+            throw new CardException("Invalid card color! Must be one of RED, BLUE, GREEN, YELLOW, PURPLE, BLACK.");
+        }
+
+        if (!currentPlayer.getPlayerHand().contains(cardPlaced)) {
+            throw new CardException("Card not found in player's hand!");
+        }
+
+        return true;
     }
 }
