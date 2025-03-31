@@ -6,6 +6,8 @@ public class Game {
     private int playerNumber;
     private boolean is2Players;
     private ArrayList<Player> players = new ArrayList<>();
+    private String divider = "===================================================================================";
+    private int delayDuration = 1800;
 
     public Game(int playerNumber) {
         this.deck = new Deck();
@@ -196,6 +198,7 @@ public class Game {
 
 
     public void conductRound() {
+        System.out.println();
         for (int currPlayerIndex  = 0; currPlayerIndex < players.size(); currPlayerIndex ++) {
             
             boolean isLastRound = this.checkLastRound();
@@ -205,22 +208,14 @@ public class Game {
             }
 
             //set currPlayer to i so that it can rotate between players
-        
             Player currentPlayer = players.get(currPlayerIndex);
-
-            System.out.println("Current Player: Player " + currentPlayer.getName());
-
-        
-            // 1. Display the current table () DONE
-            // 2. Display player collection DONE
-            // 3. Display player hand DONE
+            System.out.println("Current Player: " + currentPlayer.getName());
 
             this.displayTable();
             this.displayCollected(currentPlayer);
             this.displayHand(currentPlayer);
 
         // 4. Prompt for input EXCEPTION TBD // added option to play with bot 
-
         Card cardPlaced;
         Scanner inputScanner = new Scanner(System.in);
         
@@ -237,12 +232,12 @@ public class Game {
 
         System.out.println("Card placed is " + cardPlaced);
         table.updateParade(cardPlaced, currentPlayer);
-
+ 
 
         // 6. Provide feedback - "Cards collected: 1red, 7blue, 8yellow" DONE
 
         this.displayCollected(currentPlayer);
-
+        System.out.println();
         this.displayTable();
 
         //Draw card for player if not last round
@@ -273,49 +268,49 @@ public class Game {
     //Helper functions
 
     public void displayTable() {
-
-        System.out.println("Current Table");
-
+        System.out.println(divider);
+        System.out.println("Table: ");
         ArrayList<Card> tableCards = table.getParade();
-        int position = 1;
-        for (Card card : tableCards) {
-            System.out.printf("%d: ", position);
-            position++;
-            System.out.println(card);
+        System.out.println(tableCards);
+        System.out.println(divider);
+        System.out.println();
+        try {
+            Thread.sleep(delayDuration);   
+        } catch (Exception e) {
         }
-
-        System.out.println("==============");
-
     }
 
     public void displayHand(Player player) {
-
-        System.out.println("Current Hand: " + player.getName());
-
-        for (Card card : player.getPlayerHand()) {
-            System.out.println(card);
+        System.out.println(divider);
+        System.out.println(player.getName() + " Hand: ");
+        System.out.println(player.getPlayerHand());
+        System.out.println(divider);
+        System.out.println();
+        try {
+            Thread.sleep(delayDuration);   
+        } catch (Exception e) {
         }
-
-        System.out.println("==============");
-
     }
 
     public void displayCollected(Player player) {
+        System.out.println(divider);
 
         if (player.getCardCollection().isEmpty()) {
             System.out.println("Card Collection is empty for " + player.getName());
-            System.out.println("==============");
+            System.out.println(divider);
+            System.out.println();
             return;
         }
 
-        System.out.println("Current Collection: " + player.getName());
+        System.out.println(player.getName() + " Collection: ");
+        System.out.println(player.getCollectedCards());
+        System.out.println(divider);
+        System.out.println();
 
-
-        for (Card card : player.getCollectedCards()) {
-            System.out.println(card);
+        try {
+            Thread.sleep(delayDuration);   
+        } catch (Exception e) {
         }
-        System.out.println("==============");
-
     }
 
     public Card convertCard(String cardString) {
@@ -379,9 +374,6 @@ public class Game {
             //calculate the sccores
             HashMap<Card.Color, Integer> playerCardMap = currentPlayer.getCardCollection();
             currentPlayer.calculateScore(playerCardMap, is2Players);
-
-
-
         }
     }
 }
