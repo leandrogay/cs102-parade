@@ -210,7 +210,7 @@ public class Game {
             boolean isLastRound = this.checkLastRound();
 
             if (isLastRound) {
-                System.out.println("====LAST ROUND====");
+                printDivider("LAST ROUND");
             }
 
             // set currPlayer to i so that it can rotate between players
