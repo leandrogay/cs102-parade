@@ -69,6 +69,9 @@ public class Player {
                 score += card.getValue();
             }
         } 
+        System.out.println("Player: " + playerName);
+        System.out.println("Flipped Cards: " + flippedCards);
+        System.out.println("Collected Cards: " + collectedCards);
     }
 
 
@@ -88,7 +91,7 @@ public class Player {
         for (Card card : collectedCards) {
             Card.Color card_color= card.getColor();
             if (!card_map.containsKey(card_color)) {
-                card_map.put(card_color, 0);
+                card_map.put(card_color, 1);
             } else {
                 card_map.put(card_color, card_map.getOrDefault(card_color, 0) + 1);
             }
@@ -118,13 +121,13 @@ public class Player {
         personal_collection_map.forEach((color, num_cards) -> {
             if (opp_card_collection.containsKey(color)) { // opponent's hand also possess the card that player has
                 Integer opp_num_cards = opp_card_collection.get(color);
-                if (num_cards > opp_num_cards) { // player's card hand is more than opponent's
-                    if (num_cards - opp_num_cards >= 2) { // player has majority in this case
-                        flipped_cards.add(color);
-                    }
+                if (num_cards >= opp_num_cards + 2) { // player's card hand is more than oppenent's by at least 2 
+                    flipped_cards.add(color);
                 }
-            } else { // opponent do not possess that hand, player automatically has majority
-                flipped_cards.add(color);
+            } else { // opponent do not possess that hand, check if player has 2 or more cards 
+                if (num_cards > 1) {
+                    flipped_cards.add(color);
+                }
             }
         });
         return flipped_cards;
