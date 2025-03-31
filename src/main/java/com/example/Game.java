@@ -373,7 +373,8 @@ public class Game {
 
             //calculate the sccores
             HashMap<Card.Color, Integer> playerCardMap = currentPlayer.getCardCollection();
-            currentPlayer.calculateScore(playerCardMap, is2Players);
+            HashMap<Card.Color, Integer> majorityCardMap = getMajorityOfEachCard();
+            currentPlayer.calculateScore(majorityCardMap, is2Players);
         }
     }
 }
