@@ -162,40 +162,21 @@ public class Game {
         System.out.println(player.getName() + " collected: " + cardsToCollect);
     }
 
-    public ArrayList<Player> getWinner(){
-        int lowestScore = Integer.MAX_VALUE;
 
-        ArrayList<Player> winners = new ArrayList<>();
-        for (Player p : players){
-            if (p.getScore() < lowestScore){
-                lowestScore = p.getScore();
-            }
-        }
-
-        for (Player p : players){
-            System.out.println("Player score for " + p.getName()  + " is " + p.getScore());
-            if (p.getScore() == lowestScore){
-                winners.add(p);
-            }
-        }
-
-        return winners;
-    }
-
-    /* public ArrayList<Player> getWinner() {
+    public ArrayList<Player> getWinner() {
         List<Integer> scores = tabulateScore(); 
-        int highestScore = Collections.max(scores); // Find the highest score
+        int lowestScore = Collections.min(scores); // Find the lowest score
         ArrayList<Player> winners = new ArrayList<>();
     
 
         for (Player p : players) {
-            if (p.getScore() == highestScore) {
+            if (p.getScore() == lowestScore) {
                 winners.add(p);
             }
         }
     
         return winners;
-    } */
+    } 
 
 
 
