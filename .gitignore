@@ -1,2 +1,17 @@
 .DS_Store
+.class
+src/main/java/com/example/App.class
+src/main/java/com/example/BotPlayer.class
+src/main/java/com/example/Card$Color.class
+src/main/java/com/example/Card.class
+src/main/java/com/example/CardComparator.class
+src/main/java/com/example/Deck.class
+src/main/java/com/example/Game.class
+src/main/java/com/example/Player.class
+src/main/java/com/example/Scoreboard.class
+src/main/java/com/example/Table$Direction.class
+src/main/java/com/example/Table.class
+*.class
+*.class
+src/main/java/com/example/App.class
 *.class
