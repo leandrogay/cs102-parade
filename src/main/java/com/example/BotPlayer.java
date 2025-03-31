@@ -6,7 +6,7 @@ public class BotPlayer extends Player {
     }
 
     public Card cardToPlay(ArrayList<Card> parade){
-        ArrayList<Card> botHand = getPlayerHand();
+        ArrayList<Card> botHand = getPlayerHand(); // get hand of cards for bot 
         for (Card c : botHand) {
             if (c.getValue() > 0) {
                 return c; // choose any non-zero value card
