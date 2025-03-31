@@ -109,8 +109,12 @@ public class Game {
         }
         HashMap<Card.Color, Integer> color_majority_map = new HashMap<>();
         color_result_map.forEach((color, color_num_array) -> {
-            Integer max_color = Collections.max(color_num_array);
-            color_majority_map.put(color, max_color);
+            if (!color_num_array.isEmpty()) {  
+                Integer max_color = Collections.max(color_num_array);
+                color_majority_map.put(color, max_color);
+            } else {
+                color_majority_map.put(color, 0); 
+            }
         });
         return color_majority_map;
     }
