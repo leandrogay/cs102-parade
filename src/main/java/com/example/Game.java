@@ -192,10 +192,28 @@ public class Game {
     public ArrayList<Player> getWinner() {
         List<Integer> scores = tabulateScore();
         int lowestScore = Collections.min(scores); // Find the lowest score
-        ArrayList<Player> winners = new ArrayList<>();
+        ArrayList<Player> lowestScorePlayers = new ArrayList<>();
 
         for (Player p : players) {
             if (p.getScore() == lowestScore) {
+                lowestScorePlayers.add(p);
+            }
+        }
+        if (lowestScorePlayers.size() == 1){
+            return lowestScorePlayers;
+        }
+
+        // TIE BREAKER
+        // Still returns an array list in case of another tie
+        ArrayList<Integer> cardCounts = new ArrayList<>();
+        for (Player p : lowestScorePlayers){
+            cardCounts.add(p.getCollectedCards().size());
+        }
+        int lowestCardCount = Collections.min(cardCounts);
+
+        ArrayList<Player> winners = new ArrayList<>();
+        for (Player p : lowestScorePlayers){
+            if (p.getCollectedCards().size() == lowestCardCount){
                 winners.add(p);
             }
         }
