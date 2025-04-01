@@ -69,7 +69,7 @@ G2T4:
 - SUNKARI SARASWATI NEEHARIKA (saraswatins.2023@scis.smu.edu.sg) 
 - LEANDRO GAY (leandro.gay.2023@scis.smu.edu.sg)
 - LIM ZE YUEN
-- SIM KAY WEE
+- SIM KAY WEE (kaywee.sim.2024@computing.smu.edu.sg)
 - LIN KHANT PE THEIN
  
 
