@@ -250,14 +250,15 @@ public class Game {
             } else {
                 boolean validCard = false;
 
-                while (!validCard) { // Keep asking for a valid card
+                while (!validCard) { // Keep asking for a valid cardn
                     try {
 
-                        System.out.println("Enter card to put (color, then value): ");
-                        String cardString = inputScanner.nextLine();
-                        cardPlaced = this.convertCard(cardString);
+                        System.out.println("Enter card to put (index of card): ");
+                        int cardNumber = inputScanner.nextInt();
+                        
 
-                        if (this.checkValidCardPlacement(cardPlaced, currentPlayer)) {
+                        if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
+                            cardPlaced = currentPlayer.getPlayerHand().get(cardNumber - 1);
                             currentPlayer.removeFromHand(cardPlaced);
                             validCard = true;
                         }
@@ -391,7 +392,7 @@ public class Game {
     //     }
     // }
 
-    public Card convertCard(String cardString) {
+/*     public Card convertCard(String cardString) {
         try {
             String[] parts = cardString.trim().split("\\s+");
             if (parts.length != 2) {
@@ -406,7 +407,7 @@ public class Game {
         } catch (IllegalArgumentException e) {
             return null;
         }
-    }
+    } */
 
     public void conductScoringRound() {
         // first prompt the user to discard two cards
@@ -416,7 +417,7 @@ public class Game {
 
             Player currentPlayer = players.get(currPlayerIndex);
 
-            printDivider("DISCARD TWO CARDS");
+            DisplayUtility.printDivider("DISCARD TWO CARDS");
 
             // prompt user to discard 2 cards, then display the remaining cards, and the
             // updated collection of the player.
@@ -425,16 +426,16 @@ public class Game {
             this.displayHand(currentPlayer);
 
             System.out.println("Enter first card to be discard for Player " + currentPlayer.getName());
-            String firstCardString = sc.nextLine();
+            int firstCardNumber = sc.nextInt();
 
             System.out.println("Enter Second card to be discard for Player " + currentPlayer.getName());
-            String secondCardString = sc.nextLine();
+            int secondCardNumber = sc.nextInt();
 
             // INPUT EXCEPTIONS HERE TBD
 
-            Card firstCardDiscarded = this.convertCard(firstCardString);
+            Card firstCardDiscarded = currentPlayer.getPlayerHand().get(firstCardNumber - 1);
 
-            Card secondCardDiscarded = this.convertCard(secondCardString);
+            Card secondCardDiscarded = currentPlayer.getPlayerHand().get(secondCardNumber - 1);
 
             currentPlayer.removeFromHand(firstCardDiscarded);
             currentPlayer.removeFromHand(secondCardDiscarded);
@@ -454,18 +455,10 @@ public class Game {
         }
     }
 
-    public boolean checkValidCardPlacement(Card cardPlaced, Player currentPlayer) {
+    public boolean checkValidCardPlacement(int cardNumber, Player currentPlayer) {
 
-        if (cardPlaced == null) {
-            throw new CardException("Invalid card!");
-        }
-
-        if (cardPlaced.getValue() < 0 || cardPlaced.getValue() > 10) {
-            throw new CardException("Invalid card value! Must be between 0 and 10.");
-        }
-
-        if (!currentPlayer.getPlayerHand().contains(cardPlaced)) {
-            throw new CardException("Card not found in player's hand!");
+        if (cardNumber < 1 || cardNumber > currentPlayer.getPlayerHand().size()) {
+            throw new CardException("Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
         }
 
         return true;
