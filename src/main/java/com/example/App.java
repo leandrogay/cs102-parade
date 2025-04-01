@@ -4,10 +4,33 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println();
-        System.out.print("Enter number of players: ");
-        int playerCount = sc.nextInt();
+        int playerCount = 0;
+
+        boolean isValidPlayerCount = false;
+        
+        while (!isValidPlayerCount) {
+            try {
+                System.out.print("Enter number of players: ");
+
+                playerCount = sc.nextInt();
+
+                if (playerCount >= 2 && playerCount <= 6) {
+                    isValidPlayerCount = true;
+                } else {
+                    System.out.println("Player number be an integer value between 2 and 6");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid Input");
+
+                sc.nextLine();
+            }   
+        }
+
+
         System.out.println();
-        if (playerCount >= 2 && playerCount <= 6) { // exception needed temp for now
+
+        if (playerCount >= 2 && playerCount <= 6) { 
             Game game = new Game(playerCount);
             int cheat = 2;
             

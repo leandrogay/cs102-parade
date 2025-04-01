@@ -250,7 +250,7 @@ public class Game {
             } else {
                 boolean validCard = false;
 
-                while (!validCard) { // Keep asking for a valid cardn
+                while (!validCard) { // Keep asking for a valid card
                     try {
 
                         System.out.println("Enter card to put (color, then value): ");
