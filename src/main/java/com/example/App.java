@@ -11,7 +11,6 @@ public class App {
         while (!isValidPlayerCount) {
             try {
                 System.out.print("Enter number of players: ");
-
                 playerCount = sc.nextInt();
 
                 if (playerCount >= 2 && playerCount <= 6) {
@@ -22,7 +21,6 @@ public class App {
 
             } catch (InputMismatchException e) {
                 System.out.println("Invalid Input");
-
                 sc.nextLine();
             }   
         }
@@ -45,7 +43,8 @@ public class App {
             // one more round
             // 1. Notify that it is the last round - ""
             // 2. repeat contents of for loop 
-            System.out.println("=====LAST ROUND=====");
+            // System.out.println("=====LAST ROUND=====");
+            DisplayUtility.printDivider("LAST ROUND");
             game.conductRound();
             //this is the round where the player chooses to discard 2, and place 2
             game.conductScoringRound();
@@ -56,8 +55,8 @@ public class App {
             ArrayList<Player> players = game.getPlayers();
 
             //print out each collection and hand
-
-            System.out.println("=====SCORES=====");
+            DisplayUtility.printDivider("SCORES");
+            // System.out.println("=====SCORES=====");
 
 
             for (Player p : players) {
@@ -66,7 +65,8 @@ public class App {
             }
 
             ArrayList<Player> winners = game.getWinner();
-            System.out.println("=====WINNERS=====");
+            DisplayUtility.printDivider("WINNERS");
+            // System.out.println("=====WINNERS=====");
             System.out.println("WINNERS: ");
 
             for (Player winner : winners) {

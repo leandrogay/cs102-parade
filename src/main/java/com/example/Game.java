@@ -228,7 +228,7 @@ public class Game {
             boolean isLastRound = this.checkLastRound();
 
             if (isLastRound) {
-                printDivider("LAST ROUND");
+                DisplayUtility.printDivider("LAST ROUND");
             }
 
             // set currPlayer to i so that it can rotate between players
@@ -297,11 +297,10 @@ public class Game {
     // Helper functions
 
     public void displayTable() {
-        printDivider("TABLE");
-        // System.out.println("Table: ");
         ArrayList<Card> tableCards = table.getParade();
+        DisplayUtility.printDivider("TABLE");
         System.out.println(tableCards);
-        printDivider(null);
+        DisplayUtility.printDivider(null);
         try {
             Thread.sleep(delayDuration);
         } catch (Exception e) {
@@ -309,10 +308,9 @@ public class Game {
     }
 
     public void displayHand(Player player) {
-        printDivider(player.getName() + "'s HAND");
-        // System.out.println(player.getName() + " Hand: ");
+        DisplayUtility.printDivider(player.getName() + "'s HAND");
         System.out.println(player.getPlayerHand());
-        printDivider(null);
+        DisplayUtility.printDivider(null);
         System.out.println();
         try {
             Thread.sleep(delayDuration);
@@ -321,17 +319,17 @@ public class Game {
     }
 
     public void displayCollected(Player player) {
-        printDivider("COLLECTION");
+        DisplayUtility.printDivider("COLLECTION");
 
         if (player.getCardCollection().isEmpty()) {
             System.out.println("*collection is empty for " + player.getName() + "*");
-            printDivider(null);
+            DisplayUtility.printDivider(null);
             return;
         }
 
         System.out.println(player.getName() + " Collection: ");
         System.out.println(player.getCollectedCards());
-        printDivider(null);
+        DisplayUtility.printDivider(null);
 
         try {
             Thread.sleep(delayDuration);
@@ -339,31 +337,31 @@ public class Game {
         }
     }
 
-    public void printDivider(String text) {
-        if (text != null && !text.isEmpty()) {
-            int dividerLength = divider.length();
-            String paddedText = " " + text + " ";
-            int textLength = paddedText.length();
-            int padding = (dividerLength - textLength) / 2;
+    // public void printDivider(String text) {
+    //     if (text != null && !text.isEmpty()) {
+    //         int dividerLength = divider.length();
+    //         String paddedText = " " + text + " ";
+    //         int textLength = paddedText.length();
+    //         int padding = (dividerLength - textLength) / 2;
 
-            // Handle cases where the padded text length is greater than the divider length
-            if (textLength > dividerLength) {
-                System.out.println(paddedText.substring(0, dividerLength));
-            } else {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < padding; i++) {
-                    sb.append("=");
-                }
-                sb.append(paddedText);
-                for (int i = 0; i < dividerLength - padding - textLength; i++) {
-                    sb.append("=");
-                }
-                System.out.println(sb.toString());
-            }
-        } else {
-            System.out.println();
-        }
-    }
+    //         // Handle cases where the padded text length is greater than the divider length
+    //         if (textLength > dividerLength) {
+    //             System.out.println(paddedText.substring(0, dividerLength));
+    //         } else {
+    //             StringBuilder sb = new StringBuilder();
+    //             for (int i = 0; i < padding; i++) {
+    //                 sb.append("=");
+    //             }
+    //             sb.append(paddedText);
+    //             for (int i = 0; i < dividerLength - padding - textLength; i++) {
+    //                 sb.append("=");
+    //             }
+    //             System.out.println(sb.toString());
+    //         }
+    //     } else {
+    //         System.out.println();
+    //     }
+    // }
 
     public Card convertCard(String cardString) {
         try {
