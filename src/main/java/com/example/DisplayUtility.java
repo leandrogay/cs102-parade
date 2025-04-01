@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class DisplayUtility {
     private static final String DIVIDER = "===================================================================================";
 
@@ -33,54 +35,64 @@ public class DisplayUtility {
     }
 
     /**
-     * Prints a table of cards with proper formatting.
-     *
-     * @param title The title of the table.
-     * @param cards The list of cards to display.
-     */
-    public static void printCardTable(String title, List<Card> cards) {
-        printDivider(title);
-        System.out.printf("%-10s | %-10s%n", "COLOR", "VALUE");
-        System.out.println("----------------------------");
-        for (Card card : cards) {
-            System.out.printf("%-10s | %-10d%n", card.getColor(), card.getValue());
-        }
-        printDivider(null);
-    }
-
-    /**
-     * Prints a player's hand or collection as a formatted table.
+     * Displays a list of cards as ASCII art horizontally, showing only color and number.
      *
      * @param title The title of the display.
      * @param cards The list of cards to display.
      */
-    public static void printPlayerCards(String title, List<Card> cards) {
+    public static void displayCardsAsArt(String title, ArrayList<Card> cards) {
+        printDivider(title);
+    
         if (cards.isEmpty()) {
-            printDivider(title);
-            System.out.println("*No cards available*");
+            System.out.println("*No cards to display*");
             printDivider(null);
             return;
         }
-        printCardTable(title, cards);
+    
+        // Create ASCII art lines for each card
+        StringBuilder topLine = new StringBuilder();
+        StringBuilder colorLine = new StringBuilder();
+        StringBuilder valueLine = new StringBuilder();
+        StringBuilder bottomLine = new StringBuilder();
+    
+        for (Card card : cards) {
+            String color = formatColor(card.getColor());
+            String value = formatValue(card.getValue());
+    
+            // Add ASCII art for the card
+            topLine.append("+-------+  ");
+            colorLine.append(String.format("| %-6s|  ", color)); // Card color
+            valueLine.append(String.format("| %-6s|  ", value)); // Card value
+            bottomLine.append("+-------+  ");
+        }
+    
+        // Print the lines: Color above Value
+        System.out.println(topLine);
+        System.out.println(colorLine);
+        System.out.println(valueLine);
+        System.out.println(bottomLine);
+    
+        printDivider(null);
+    }
+
+        /**
+     * Formats the color of a card as its full name.
+     *
+     * @param color The card's color.
+     * @return The formatted color name in uppercase.
+     */
+    private static String formatColor(Card.Color color) {
+        return color.name(); // Use full color name
     }
 
     /**
-     * Prints a player's collection summary with counts for each color.
+     * Formats the value of a card as a string.
      *
-     * @param title The title of the display.
-     * @param cardCollection A map containing card colors and their counts.
+     * @param value The numeric value of the card.
+     * @return The formatted value as a string.
      */
-    public static void printCollectionSummary(String title, Map<Card.Color, Integer> cardCollection) {
-        printDivider(title);
-        if (cardCollection.isEmpty()) {
-            System.out.println("*No collected cards*");
-        } else {
-            System.out.printf("%-10s | %-10s%n", "COLOR", "COUNT");
-            System.out.println("----------------------------");
-            for (Map.Entry<Card.Color, Integer> entry : cardCollection.entrySet()) {
-                System.out.printf("%-10s | %-10d%n", entry.getKey(), entry.getValue());
-            }
-        }
-        printDivider(null);
+    private static String formatValue(int value) {
+        return Integer.toString(value); // Simply convert to string
     }
 }
+

@@ -298,44 +298,72 @@ public class Game {
 
     public void displayTable() {
         ArrayList<Card> tableCards = table.getParade();
-        DisplayUtility.printDivider("TABLE");
-        System.out.println(tableCards);
-        DisplayUtility.printDivider(null);
+        DisplayUtility.displayCardsAsArt("TABLE", tableCards);
+
         try {
             Thread.sleep(delayDuration);
         } catch (Exception e) {
+            // Handle exception
         }
     }
+    // public void displayTable() {
+    //     ArrayList<Card> tableCards = table.getParade();
+    //     DisplayUtility.printDivider("TABLE");
+    //     System.out.println(tableCards);
+    //     DisplayUtility.printDivider(null);
+    //     try {
+    //         Thread.sleep(delayDuration);
+    //     } catch (Exception e) {
+    //     }
+    // }
 
     public void displayHand(Player player) {
-        DisplayUtility.printDivider(player.getName() + "'s HAND");
-        System.out.println(player.getPlayerHand());
-        DisplayUtility.printDivider(null);
-        System.out.println();
+        DisplayUtility.displayCardsAsArt(player.getName() + "'s HAND", player.getPlayerHand());
+
         try {
             Thread.sleep(delayDuration);
         } catch (Exception e) {
+            // Handle exception
         }
     }
+    // public void displayHand(Player player) {
+    //     DisplayUtility.printDivider(player.getName() + "'s HAND");
+    //     System.out.println(player.getPlayerHand());
+    //     DisplayUtility.printDivider(null);
+    //     System.out.println();
+    //     try {
+    //         Thread.sleep(delayDuration);
+    //     } catch (Exception e) {
+    //     }
+    // }
 
     public void displayCollected(Player player) {
-        DisplayUtility.printDivider("COLLECTION");
-
-        if (player.getCardCollection().isEmpty()) {
-            System.out.println("*collection is empty for " + player.getName() + "*");
-            DisplayUtility.printDivider(null);
-            return;
-        }
-
-        System.out.println(player.getName() + " Collection: ");
-        System.out.println(player.getCollectedCards());
-        DisplayUtility.printDivider(null);
+        DisplayUtility.displayCardsAsArt(player.getName() + "'s COLLECTION", player.getCollectedCards());
 
         try {
             Thread.sleep(delayDuration);
         } catch (Exception e) {
+            // Handle exception
         }
     }
+    // public void displayCollected(Player player) {
+    //     DisplayUtility.printDivider("COLLECTION");
+
+    //     if (player.getCardCollection().isEmpty()) {
+    //         System.out.println("*collection is empty for " + player.getName() + "*");
+    //         DisplayUtility.printDivider(null);
+    //         return;
+    //     }
+
+    //     System.out.println(player.getName() + " Collection: ");
+    //     System.out.println(player.getCollectedCards());
+    //     DisplayUtility.printDivider(null);
+
+    //     try {
+    //         Thread.sleep(delayDuration);
+    //     } catch (Exception e) {
+    //     }
+    // }
 
     // public void printDivider(String text) {
     //     if (text != null && !text.isEmpty()) {
