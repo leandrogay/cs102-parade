@@ -326,50 +326,6 @@ public class Game {
             // Handle exception
         }
     }
-    // public void displayCollected(Player player) {
-    //     DisplayUtility.printDivider("COLLECTION");
-
-    //     if (player.getCardCollection().isEmpty()) {
-    //         System.out.println("*collection is empty for " + player.getName() + "*");
-    //         DisplayUtility.printDivider(null);
-    //         return;
-    //     }
-
-    //     System.out.println(player.getName() + " Collection: ");
-    //     System.out.println(player.getCollectedCards());
-    //     DisplayUtility.printDivider(null);
-
-    //     try {
-    //         Thread.sleep(delayDuration);
-    //     } catch (Exception e) {
-    //     }
-    // }
-
-    // public void printDivider(String text) {
-    //     if (text != null && !text.isEmpty()) {
-    //         int dividerLength = divider.length();
-    //         String paddedText = " " + text + " ";
-    //         int textLength = paddedText.length();
-    //         int padding = (dividerLength - textLength) / 2;
-
-    //         // Handle cases where the padded text length is greater than the divider length
-    //         if (textLength > dividerLength) {
-    //             System.out.println(paddedText.substring(0, dividerLength));
-    //         } else {
-    //             StringBuilder sb = new StringBuilder();
-    //             for (int i = 0; i < padding; i++) {
-    //                 sb.append("=");
-    //             }
-    //             sb.append(paddedText);
-    //             for (int i = 0; i < dividerLength - padding - textLength; i++) {
-    //                 sb.append("=");
-    //             }
-    //             System.out.println(sb.toString());
-    //         }
-    //     } else {
-    //         System.out.println();
-    //     }
-    // }
 
 /*     public Card convertCard(String cardString) {
         try {
@@ -413,14 +369,12 @@ public class Game {
             // INPUT EXCEPTIONS HERE TBD
 
             Card firstCardDiscarded = currentPlayer.getPlayerHand().get(firstCardNumber - 1);
-
             Card secondCardDiscarded = currentPlayer.getPlayerHand().get(secondCardNumber - 1);
 
             currentPlayer.removeFromHand(firstCardDiscarded);
             currentPlayer.removeFromHand(secondCardDiscarded);
 
             // add rest to the collection
-
             for (Card remainingCards : currentPlayer.getPlayerHand()) {
                 currentPlayer.collectCard(remainingCards);
             }
@@ -428,7 +382,7 @@ public class Game {
             this.displayCollected(currentPlayer);
 
             // calculate the sccores
-            HashMap<Card.Color, Integer> playerCardMap = currentPlayer.getCardCollection();
+            HashMap<Card.Color, Integer> playerCardMap = currentPlayer.getCardCollection(); // Is this used? if not shld remove to clean up the code
             HashMap<Card.Color, Integer> majorityCardMap = getMajorityOfEachCard();
             currentPlayer.calculateScore(majorityCardMap, is2Players);
         }
