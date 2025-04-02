@@ -382,7 +382,6 @@ public class Game {
             this.displayCollected(currentPlayer);
 
             // calculate the sccores
-            HashMap<Card.Color, Integer> playerCardMap = currentPlayer.getCardCollection(); // Is this used? if not shld remove to clean up the code
             HashMap<Card.Color, Integer> majorityCardMap = getMajorityOfEachCard();
             currentPlayer.calculateScore(majorityCardMap, is2Players);
         }
