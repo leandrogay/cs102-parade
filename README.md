@@ -65,7 +65,7 @@ Our project uses Java programming to simulate the game's logic, allowing users t
 ## Contributors 
 --------------
 G2T4: 
-- GOH YANG JUN
+- GOH YANG JUN (yangjun.goh.2022@economics.smu.edu.sg)
 - SUNKARI SARASWATI NEEHARIKA (saraswatins.2023@scis.smu.edu.sg) 
 - LEANDRO GAY (leandro.gay.2023@scis.smu.edu.sg)
 - LIM ZE YUEN
