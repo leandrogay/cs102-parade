@@ -230,8 +230,8 @@ public class Game {
             if (isLastRound) {
                 DisplayUtility.printDivider("LAST ROUND");
             }
-
             // set currPlayer to i so that it can rotate between players
+
             Player currentPlayer = players.get(currPlayerIndex);
             System.out.println("Current Player: " + currentPlayer.getName());
 
@@ -266,9 +266,6 @@ public class Game {
                     } catch (InputMismatchException e) {
                         System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
                         inputScanner.nextLine();
-
-                    } catch (Exception e) {
-                        System.out.println("Error: " + e.getMessage());
                     }
                 }
             }
@@ -351,39 +348,89 @@ public class Game {
     public void conductScoringRound() {
         // first prompt the user to discard two cards
         for (int currPlayerIndex = 0; currPlayerIndex < players.size(); currPlayerIndex++) {
-
             // set currPlayer to i so that it can rotate between players
 
             Player currentPlayer = players.get(currPlayerIndex);
+            System.out.println("Current Player: " + currentPlayer.getName());
 
-            DisplayUtility.printDivider("DISCARD TWO CARDS");
+
+            this.displayTable();
+            this.displayCollected(currentPlayer);
+            DisplayUtility.printDivider("DISCARD FIRST CARD");
+            this.displayHand(currentPlayer);
 
             // prompt user to discard 2 cards, then display the remaining cards, and the
             // updated collection of the player.
-            Scanner sc = new Scanner(System.in);
+            int cardDiscardedIndex1 = 0;
+            int cardDiscardedIndex2 = 0;
+            Scanner inputScanner = new Scanner(System.in);
 
+            // HANDLE BOT LOGIC IF REQUIRED
+
+
+            boolean validCard1 = false;
+
+                while (!validCard1) { // Prompts user until they input a valid card
+                    try {
+
+                        System.out.println("Enter first card to be discarded (index of card): ");
+                        int cardNumber = inputScanner.nextInt();
+                        
+
+                        if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
+                            cardDiscardedIndex1 = cardNumber;
+                            validCard1 = true;
+                        }
+
+                    } catch (InputMismatchException e) {
+                        System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
+                        inputScanner.nextLine();
+                    } 
+                }
+
+            Card firstCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex1 - 1);
+            currentPlayer.removeFromHand(firstCardDiscarded);
+            
+            DisplayUtility.printDivider("DISCARD SECOND CARD");
             this.displayHand(currentPlayer);
 
-            try {
-                System.out.println("Enter first card to be discard for Player " + currentPlayer.getName());
-                int firstCardNumber = sc.nextInt();
+            boolean validCard2 = false;
 
-                System.out.println("Enter Second card to be discard for Player " + currentPlayer.getName());
-                int secondCardNumber = sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
-                sc.nextLine();
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-            }
+                while (!validCard2) { // Prompts user until they input a valid card
+                    try {
+
+                        System.out.println("Enter second card to be discarded (index of card): ");
+                        int cardNumber = inputScanner.nextInt();
+                        
+
+                        if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
+                            cardDiscardedIndex2 = cardNumber;
+                            validCard2 = true;
+                        }
+
+                    } catch (InputMismatchException e) {
+                        System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
+                        inputScanner.nextLine();
+                    } 
+                }
+
+                Card secondCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex2 - 1);
+                currentPlayer.removeFromHand(secondCardDiscarded);
+
+            // try {
+            //     System.out.println("Enter first card to be discard for Player " + currentPlayer.getName());
+            //     int firstCardNumber = sc.nextInt();
+
+            //     System.out.println("Enter Second card to be discard for Player " + currentPlayer.getName());
+            //     int secondCardNumber = sc.nextInt();
+            // } catch (InputMismatchException e) {
+            //     System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
+            //     sc.nextLine();
+            // } catch (Exception e) {
+            //     System.out.println("Error: " + e.getMessage());
+            // }
 
             // INPUT EXCEPTIONS HERE TBD
-
-            Card firstCardDiscarded = currentPlayer.getPlayerHand().get(firstCardNumber - 1);
-            Card secondCardDiscarded = currentPlayer.getPlayerHand().get(secondCardNumber - 1);
-
-            currentPlayer.removeFromHand(firstCardDiscarded);
-            currentPlayer.removeFromHand(secondCardDiscarded);
 
             // add rest to the collection
             for (Card remainingCards : currentPlayer.getPlayerHand()) {
