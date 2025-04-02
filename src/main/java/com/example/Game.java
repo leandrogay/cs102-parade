@@ -266,6 +266,8 @@ public class Game {
                     } catch (InputMismatchException e) {
                         System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
                         inputScanner.nextLine();
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
                     }
                 }
             }
@@ -385,7 +387,9 @@ public class Game {
                     } catch (InputMismatchException e) {
                         System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
                         inputScanner.nextLine();
-                    } 
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
                 }
 
             Card firstCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex1 - 1);
