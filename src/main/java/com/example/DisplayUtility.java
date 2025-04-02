@@ -5,12 +5,12 @@ public class DisplayUtility {
 
     // // ANSI color codes
     private static final String DEFAULT_COLOR = "\u001B[0m";
-    // private static final String RED = "\u001B[31m";
-    // private static final String GREEN = "\u001B[32m";
-    // private static final String YELLOW = "\u001B[33m";
-    // private static final String BLUE = "\u001B[34m";
-    // private static final String PURPLE = "\u001B[35m";
-    // private static final String BLACK = "\u001B[30m";
+    private static final String RED_COLOR = "\u001B[31m";
+    private static final String BLUE_COLOR = "\u001B[34m";
+    private static final String GREEN_COLOR = "\u001B[32m";
+    private static final String YELLOW_COLOR = "\u001B[33m";
+    private static final String PURPLE_COLOR = "\u001B[35m";
+    private static final String BLACK_COLOR = "\u001B[30m";
 
     /**
      * Prints a divider line with optional centered text.
@@ -107,17 +107,17 @@ public class DisplayUtility {
     private static String getColorCode(Card.Color color) {
         switch (color) {
             case RED:
-                return "\u001B[31m";
+                return RED_COLOR;
             case BLUE:
-                return "\u001B[34m";
+                return BLUE_COLOR;
             case GREEN:
-                return "\u001B[32m";
+                return GREEN_COLOR;
             case YELLOW:
-                return "\u001B[33m";
+                return YELLOW_COLOR;
             case PURPLE:
-                return "\u001B[35m";
+                return PURPLE_COLOR;
             case BLACK:
-                return "\u001B[30m";
+                return BLACK_COLOR;
             default:
                 return DEFAULT_COLOR; // Default to no color
         }
