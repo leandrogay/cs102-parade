@@ -307,7 +307,7 @@ public class Game {
         try {
             Thread.sleep(delayDuration);
         } catch (Exception e) {
-            // Handle exception
+            // Swallow exception
         }
     }
 
@@ -317,7 +317,7 @@ public class Game {
         try {
             Thread.sleep(delayDuration);
         } catch (Exception e) {
-            // Handle exception
+            // Swallow exception
         }
     }
 
@@ -327,7 +327,7 @@ public class Game {
         try {
             Thread.sleep(delayDuration);
         } catch (Exception e) {
-            // Handle exception
+            // Swallow exception
         }
     }
 
@@ -364,11 +364,18 @@ public class Game {
 
             this.displayHand(currentPlayer);
 
-            System.out.println("Enter first card to be discard for Player " + currentPlayer.getName());
-            int firstCardNumber = sc.nextInt();
+            try {
+                System.out.println("Enter first card to be discard for Player " + currentPlayer.getName());
+                int firstCardNumber = sc.nextInt();
 
-            System.out.println("Enter Second card to be discard for Player " + currentPlayer.getName());
-            int secondCardNumber = sc.nextInt();
+                System.out.println("Enter Second card to be discard for Player " + currentPlayer.getName());
+                int secondCardNumber = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
+                sc.nextLine();
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
 
             // INPUT EXCEPTIONS HERE TBD
 
