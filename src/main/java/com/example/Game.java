@@ -296,10 +296,9 @@ public class Game {
     }
 
     // Helper functions
-
     public void displayTable() {
         ArrayList<Card> tableCards = table.getParade();
-        DisplayUtility.displayCardsAsArt("TABLE", tableCards);
+        DisplayUtility.displayCardsAsArt("TABLE", tableCards, false);
 
         try {
             Thread.sleep(delayDuration);
@@ -307,19 +306,9 @@ public class Game {
             // Handle exception
         }
     }
-    // public void displayTable() {
-    //     ArrayList<Card> tableCards = table.getParade();
-    //     DisplayUtility.printDivider("TABLE");
-    //     System.out.println(tableCards);
-    //     DisplayUtility.printDivider(null);
-    //     try {
-    //         Thread.sleep(delayDuration);
-    //     } catch (Exception e) {
-    //     }
-    // }
 
     public void displayHand(Player player) {
-        DisplayUtility.displayCardsAsArt(player.getName() + "'s HAND", player.getPlayerHand());
+        DisplayUtility.displayCardsAsArt(player.getName() + "'s HAND", player.getPlayerHand(), true);
 
         try {
             Thread.sleep(delayDuration);
@@ -327,19 +316,9 @@ public class Game {
             // Handle exception
         }
     }
-    // public void displayHand(Player player) {
-    //     DisplayUtility.printDivider(player.getName() + "'s HAND");
-    //     System.out.println(player.getPlayerHand());
-    //     DisplayUtility.printDivider(null);
-    //     System.out.println();
-    //     try {
-    //         Thread.sleep(delayDuration);
-    //     } catch (Exception e) {
-    //     }
-    // }
 
     public void displayCollected(Player player) {
-        DisplayUtility.displayCardsAsArt(player.getName() + "'s COLLECTION", player.getCollectedCards());
+        DisplayUtility.displayCardsAsArt(player.getName() + "'s COLLECTION", player.getCollectedCards(), false);
 
         try {
             Thread.sleep(delayDuration);

@@ -3,6 +3,15 @@ import java.util.*;
 public class DisplayUtility {
     private static final String DIVIDER = "===================================================================================";
 
+    // // ANSI color codes
+    private static final String DEFAULT_COLOR = "\u001B[0m";
+    // private static final String RED = "\u001B[31m";
+    // private static final String GREEN = "\u001B[32m";
+    // private static final String YELLOW = "\u001B[33m";
+    // private static final String BLUE = "\u001B[34m";
+    // private static final String PURPLE = "\u001B[35m";
+    // private static final String BLACK = "\u001B[30m";
+
     /**
      * Prints a divider line with optional centered text.
      * If no text is provided, it prints a plain divider line.
@@ -36,46 +45,85 @@ public class DisplayUtility {
 
     /**
      * Displays a list of cards as ASCII art horizontally, showing only color and number.
+     * Also displays the index of each card below the ASCII art, centered under each card.
      *
      * @param title The title of the display.
      * @param cards The list of cards to display.
      */
-    public static void displayCardsAsArt(String title, ArrayList<Card> cards) {
+    public static void displayCardsAsArt(String title, ArrayList<Card> cards, boolean printIndex) {
         printDivider(title);
-    
+
         if (cards.isEmpty()) {
             System.out.println("*No cards to display*");
             printDivider(null);
             return;
         }
-    
+
         // Create ASCII art lines for each card
         StringBuilder topLine = new StringBuilder();
         StringBuilder colorLine = new StringBuilder();
         StringBuilder valueLine = new StringBuilder();
         StringBuilder bottomLine = new StringBuilder();
-    
-        for (Card card : cards) {
-            String color = formatColor(card.getColor());
+        StringBuilder indexLine = new StringBuilder();
+
+        for (int i = 0; i < cards.size(); i++) {
+            Card card = cards.get(i);
+            String colorCode = getColorCode(card.getColor());
+            String colorName = formatColor(card.getColor());
             String value = formatValue(card.getValue());
-    
+
             // Add ASCII art for the card
             topLine.append("+-------+  ");
-            colorLine.append(String.format("| %-6s|  ", color)); // Card color
-            valueLine.append(String.format("| %-6s|  ", value)); // Card value
+            colorLine.append(String.format("| %s%-6s%s|  ", colorCode, colorName, DEFAULT_COLOR)); // Card color with ANSI code
+            valueLine.append(String.format("| %s%-6s%s|  ", colorCode, value, DEFAULT_COLOR)); // Card value with ANSI code
             bottomLine.append("+-------+  ");
+
+            // Center index below each card
+            int cardWidth = 9; // Width of "+-------+"
+            int indexWidth = Integer.toString(i + 1).length(); // Length of the index number
+            int padding = (cardWidth - indexWidth) / 2; // Calculate spaces needed on each side
+            indexLine.append(" ".repeat(padding)).append(i + 1).append(" ".repeat(cardWidth - indexWidth - padding)).append("  ");
         }
-    
-        // Print the lines: Color above Value
+
+        // Print the lines: Color above Value and Index below
         System.out.println(topLine);
         System.out.println(colorLine);
         System.out.println(valueLine);
         System.out.println(bottomLine);
-    
+
+        if (printIndex) {
+            System.out.println(indexLine);
+        }
+
         printDivider(null);
     }
 
-        /**
+    /**
+     * Returns the ANSI color code for a given card color.
+     *
+     * @param color The card's color.
+     * @return The corresponding ANSI escape code for the color.
+     */
+    private static String getColorCode(Card.Color color) {
+        switch (color) {
+            case RED:
+                return "\u001B[31m";
+            case BLUE:
+                return "\u001B[34m";
+            case GREEN:
+                return "\u001B[32m";
+            case YELLOW:
+                return "\u001B[33m";
+            case PURPLE:
+                return "\u001B[35m";
+            case BLACK:
+                return "\u001B[30m";
+            default:
+                return DEFAULT_COLOR; // Default to no color
+        }
+    }
+
+    /**
      * Formats the color of a card as its full name.
      *
      * @param color The card's color.
@@ -95,4 +143,3 @@ public class DisplayUtility {
         return Integer.toString(value); // Simply convert to string
     }
 }
-
