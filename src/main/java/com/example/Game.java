@@ -250,7 +250,7 @@ public class Game {
             } else {
                 boolean validCard = false;
 
-                while (!validCard) { // Keep asking for a valid cardn
+                while (!validCard) { // Prompts user until they input a valid card
                     try {
 
                         System.out.println("Enter card to put (index of card): ");
@@ -262,6 +262,10 @@ public class Game {
                             currentPlayer.removeFromHand(cardPlaced);
                             validCard = true;
                         }
+
+                    } catch (InputMismatchException e) {
+                        System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
+                        inputScanner.nextLine();
 
                     } catch (Exception e) {
                         System.out.println("Error: " + e.getMessage());
