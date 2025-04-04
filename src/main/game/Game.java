@@ -1,4 +1,9 @@
+package game;
+
 import java.util.*;
+import player.*;
+import card.*;
+import exception.*;
 
 public class Game {
     private Deck deck;

@@ -1,6 +1,10 @@
+package scoreboard;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
+
+import player.Player;
 
 public class Scoreboard {
     public void readScore(String pathname) {

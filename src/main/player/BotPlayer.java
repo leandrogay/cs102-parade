@@ -1,4 +1,8 @@
+package player;
+
 import java.util.*;
+import card.*;
+import game.*;
 
 public class BotPlayer extends Player {
     public BotPlayer(String name){

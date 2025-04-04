@@ -1,3 +1,5 @@
+package card;
+
 public class Card {
     enum Color { RED, BLUE, GREEN, YELLOW, PURPLE, BLACK }
     

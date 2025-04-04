@@ -1,4 +1,7 @@
+package player;
+
 import java.util.*;
+import card.*;
 
 public class Player {
     private String playerName;

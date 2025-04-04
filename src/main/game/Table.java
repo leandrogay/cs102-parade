@@ -1,5 +1,8 @@
-import java.util.*;
+package game;
 
+import java.util.*;
+import card.*;
+import player.Player;
 
 public class Table{
     enum Direction {LEFT_TO_RIGHT, RIGHT_TO_LEFT};
