@@ -1,0 +1,1 @@
+javac -d "src\main\java\com\example\classes" -cp src/main src/main/App.java
