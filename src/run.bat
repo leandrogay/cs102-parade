@@ -1,0 +1,1 @@
+java -cp main/java/com/example/classes App

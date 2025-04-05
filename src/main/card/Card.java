@@ -1,7 +1,7 @@
 package card;
 
 public class Card {
-    enum Color { RED, BLUE, GREEN, YELLOW, PURPLE, BLACK }
+    public enum Color { RED, BLUE, GREEN, YELLOW, PURPLE, BLACK }
     
     private final Color color;
     private final int value;
