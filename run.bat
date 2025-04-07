@@ -1,1 +1,1 @@
-java -cp src/main/java/com/example/classes App
+java -cp out App
