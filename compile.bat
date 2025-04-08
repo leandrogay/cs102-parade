@@ -1,1 +1,1 @@
-javac -d out -cp src/main src/main/App.java
+javac -d classes -cp src/main src/main/App.java
