@@ -9,6 +9,7 @@ public class Game {
     private Deck deck;
     private Table table;
     private int playerNumber;
+    private int botCount;
     private boolean is2Players;
     private ArrayList<Player> players = new ArrayList<>();
     private String divider = "===================================================================================";
@@ -18,29 +19,61 @@ public class Game {
         this.deck = new Deck();
         this.table = new Table();
         this.playerNumber = playerNumber;
-
-        Scanner sc = new Scanner(System.in);
-
-        for (int i = 0; i < this.playerNumber; i++) {
-            System.out.print("Enter name for Player " + (i + 1) + ": ");
-            String name = sc.nextLine();
-            // nee testing
-            if (name.equalsIgnoreCase("bot")) {
-                players.add(new BotPlayer("BotPlayer" + (i + 1)));
-            } else {
-                players.add(new Player(name));
-            }
-            // nee testing end
-
-            // og code
-            // players.add(new Player(name));
-            // og code end
-        }
-
+        playerSettings();
         dealStartingHands();
         setTable();
     }
 
+    public void playerSettings(){
+        Scanner sc = new Scanner(System.in);
+        
+        boolean validPlayerSetup = false;
+        
+        while (!validPlayerSetup) {
+            players.clear(); // clear player list
+            botCount = 0; // reset number of bots 
+            
+            boolean inputError = false; // to check for input error (not y or n)
+            
+            for (int i = 0; i < this.playerNumber; i++) {
+                System.out.print("Do you want Player " + (i + 1) + " to be a bot? (y/n): ");
+                String isBotResponse = sc.nextLine().trim().toLowerCase();
+                
+                switch (isBotResponse) {
+                    case "y":
+                        players.add(new BotPlayer("BotPlayer " + (i + 1)));
+                        botCount++; // keep track of number of bots 
+                        break;
+                    case "n":
+                        System.out.print("Enter name for Player " + (i + 1) + ": ");
+                        String name = sc.nextLine().trim();
+                        players.add(new Player(name));
+                        break;
+                    default:
+                        System.out.println("Invalid input. Please enter either y or n");
+                        inputError = true;
+                        break;
+                }
+                
+                if (inputError) {
+                    break; // exit loop if input error 
+                }
+            }
+            
+            // if there is an input error, continue the while loop 
+            if (inputError) {
+                continue;
+            }
+            
+            // to check if all players all bots (all players should not be bots)
+            if (botCount == playerNumber) {
+                System.out.println("At least one human player is required. Restarting player setup."); // while loop will continue and player setup will restart 
+            } else {
+                validPlayerSetup = true;
+            }
+        }
+    }
+    
     public void dealStartingHands() { // Distributes 5 cards to each player
         int cardsPerPlayer = 5;
 
@@ -461,5 +494,6 @@ public class Game {
         }
 
         return true;
-    }
+    }   
+
 }
