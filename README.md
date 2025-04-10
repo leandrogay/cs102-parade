@@ -60,6 +60,12 @@ Our project uses Java programming to simulate the game's logic, allowing users t
 
 ---
 
+## Documentation
+### UML Diagram
+![UMLDiagram-Page-3 (3)](https://github.com/user-attachments/assets/155ded74-1f9d-4b63-a553-56da77ee85aa)
+
+---
+
 ## Acknowledgements 
 ### Contributors
 G2T4: 
