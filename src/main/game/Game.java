@@ -99,6 +99,36 @@ public class Game {
         }
     }
 
+    public static void startGame(int playerCount){
+        if (playerCount >= 2 && playerCount <= 6) {
+            Game game = new Game(playerCount);
+
+            while (!game.checkLastRound()) {
+                game.conductRound(); // conduct round while not last round
+            }
+
+            DisplayUtility.printDivider("LAST ROUND");
+            game.conductRound();
+            game.conductScoringRound();
+
+            List<Player> players = game.getPlayers();
+            DisplayUtility.printDivider("SCORES");
+
+            for (Player p : players) {
+                System.out.println("score for " + p.getName() + " is " + p.getScore());
+                game.displayCollected(p);
+            }
+
+            List<Player> winners = game.getWinner();
+            DisplayUtility.printDivider("WINNERS");
+            System.out.println("WINNERS: ");
+
+            for (Player winner : winners) {
+                System.out.println(winner.getName());
+            }
+        }
+    }
+
     public List<Card> getDeck() {
         return deck.getDeck();
     }
