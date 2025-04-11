@@ -124,7 +124,8 @@ public class Game {
                 System.out.println(winner.getName());
             }
         }
-        System.out.println("Do you want to play again?");
+        System.out.println();
+        System.out.print("Do you want to play again?: ");
         Scanner sc = new Scanner(System.in);
         String playAgain = sc.nextLine().trim().toLowerCase();
         switch (playAgain) {
@@ -133,8 +134,10 @@ public class Game {
                 Game.startGame(Menu.getPlayerCount());
                 break;
             case "n":
+                System.out.println();
                 System.out.println("You have quit the game.");
-                break;
+                System.out.println();
+                System.exit(0);
             default:
                 System.out.println();
                 System.out.println("ERROR! Invalid input. Please enter either y or n");
@@ -462,8 +465,12 @@ public class Game {
                     }
                 }
 
-            Card firstCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex1 - 1);
-            currentPlayer.removeFromHand(firstCardDiscarded);
+            // try {
+                Card firstCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex1 - 1);
+                currentPlayer.removeFromHand(firstCardDiscarded);
+            // } catch (IndexOutOfBoundsException e){
+            //     System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+            // }
             
             DisplayUtility.printDivider("DISCARD SECOND CARD");
             this.displayHand(currentPlayer);
@@ -490,8 +497,12 @@ public class Game {
                     } 
                 }
 
-                Card secondCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex2 - 1);
-                currentPlayer.removeFromHand(secondCardDiscarded);
+                // try {
+                    Card secondCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex2 - 1);
+                    currentPlayer.removeFromHand(secondCardDiscarded);
+                // } catch (IndexOutOfBoundsException e){
+                //     System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+                // }
 
             // try {
             //     System.out.println("Enter first card to be discard for Player " + currentPlayer.getName());
@@ -522,12 +533,14 @@ public class Game {
     }
 
     public boolean checkValidCardPlacement(int cardNumber, Player currentPlayer) {
-
-        if (cardNumber < 1 || cardNumber > currentPlayer.getPlayerHand().size()) {
-            System.out.println();
-            throw new CardException("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+        try {
+            if (cardNumber < 1 || cardNumber > currentPlayer.getPlayerHand().size()) {
+                System.out.println();
+                throw new CardException("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+            }
+        } catch (CardException e){
+            System.out.println(e.getMessage());
         }
-
         return true;
     }   
 
