@@ -31,13 +31,9 @@ public class App {
 
         if (playerCount >= 2 && playerCount <= 6) {
             Game game = new Game(playerCount);
-
-            int cheat = 2; // TEMPORARY FOR TESTING
-
-            while (cheat > 0) {
-                // while (!game.checkLastRound()) {
+            
+            while (!game.checkLastRound()) {
                 game.conductRound(); // conduct round while not last round
-                cheat--;
             }
 
             DisplayUtility.printDivider("LAST ROUND");

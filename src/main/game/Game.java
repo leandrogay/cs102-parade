@@ -54,12 +54,7 @@ public class Game {
                         inputError = true;
                         break;
                 }
-                
-                if (inputError) {
-                    break; // exit loop if input error 
-                }
             }
-            
             // if there is an input error, continue the while loop 
             if (inputError) {
                 continue;
@@ -122,7 +117,7 @@ public class Game {
         for (Card.Color color : Card.Color.values()) {
             colorResultMap.put(color, new ArrayList<>());
             for (Player player : players) {
-                HashMap<Card.Color, Integer> playerCollection = player.getCardCollection();
+                Map<Card.Color, Integer> playerCollection = player.getCardCollection();
                 if (playerCollection.containsKey(color)) { // player collection possesses a card of that color
                     colorResultMap.get(color).add(playerCollection.get(color));
                 }

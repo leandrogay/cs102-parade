@@ -81,7 +81,7 @@ public class Player {
 
     public int getNumColors() { // return the number of colors in collected hand
         List<Card.Color> checkColors;
-        check_colors = new ArrayList<>();
+        checkColors = new ArrayList<>();
         for (Card card : collectedCards) {
             if (!checkColors.contains(card.getColor())) {
                 checkColors.add(card.getColor());
