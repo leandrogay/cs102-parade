@@ -57,11 +57,15 @@ public class Menu {
                 if (playerCount >= 2 && playerCount <= 6) {
                     isValidPlayerCount = true;
                 } else {
-                    System.out.println("Player number be an integer value between 2 and 6");
+                    System.out.println();
+                    System.out.println("ERROR! Player number be an integer value between 2 and 6");
+                    System.out.println();
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("Invalid Input");
+                System.out.println();
+                System.out.println("ERROR! Invalid Input");
+                System.out.println();
                 sc.nextLine();
             }
         }

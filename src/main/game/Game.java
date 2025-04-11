@@ -308,10 +308,14 @@ public class Game {
                         }
 
                     } catch (InputMismatchException e) {
-                        System.out.println("Error: Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+                        System.out.println();
+                        System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+                        System.out.println();
                         inputScanner.nextLine();
                     } catch (Exception e) {
-                        System.out.println("Error: " + e.getMessage());
+                        System.out.println();
+                        System.out.println("ERROR! " + e.getMessage());
+                        System.out.println();
                     }
                 }
             }
@@ -433,10 +437,14 @@ public class Game {
                         }
 
                     } catch (InputMismatchException e) {
-                        System.out.println("Error: Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+                        System.out.println();
+                        System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+                        System.out.println();
                         inputScanner.nextLine();
                     } catch (Exception e) {
-                        System.out.println("Error: " + e.getMessage());
+                        System.out.println();
+                        System.out.println("ERROR! " + e.getMessage());
+                        System.out.println();
                     }
                 }
 
@@ -461,7 +469,9 @@ public class Game {
                         }
 
                     } catch (InputMismatchException e) {
-                        System.out.println("Error: Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+                        System.out.println();
+                        System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+                        System.out.println();
                         inputScanner.nextLine();
                     } 
                 }
@@ -500,7 +510,8 @@ public class Game {
     public boolean checkValidCardPlacement(int cardNumber, Player currentPlayer) {
 
         if (cardNumber < 1 || cardNumber > currentPlayer.getPlayerHand().size()) {
-            throw new CardException("Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+            System.out.println();
+            throw new CardException("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
         }
 
         return true;
