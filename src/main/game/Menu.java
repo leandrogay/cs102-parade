@@ -12,7 +12,6 @@ public class Menu {
 
             String input = "";
             System.out.print("Please enter your choice: ");
-            boolean inputError = false; 
             input = sc.nextLine();
             choice = 0;
             if (!input.isBlank()) {
@@ -28,15 +27,15 @@ public class Menu {
                             break;
 
                         default:
-                            System.out.println("Enter a number 1 to 2");
-                            inputError = true;
+                            System.out.println();
+                            System.out.println("ERROR! Please enter either 1 or 2");
+                            System.out.println();
                             break;
                     }
                 } catch (NumberFormatException e){
                     System.out.println();
                     System.out.println("ERROR! Please enter a number.");
                     System.out.println();
-                    inputError = true; 
                 }
             } 
         } while (choice != 2);
