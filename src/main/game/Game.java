@@ -57,7 +57,9 @@ public class Game {
             
             // to check if all players all bots (all players should not be bots)
             if (botCount == playerNumber) {
+                System.out.println();
                 System.out.println("ERROR! At least one human player is required. Restarting player setup."); // while loop will continue and player setup will restart 
+                System.out.println();
             } else {
                 validPlayerSetup = true;
             }
