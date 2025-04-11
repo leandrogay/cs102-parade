@@ -33,8 +33,6 @@ public class Game {
             players.clear(); // clear player list
             botCount = 0; // reset number of bots 
             
-            boolean inputError = false; // to check for input error (not y or n)
-            
             for (int i = 0; i < this.playerNumber; i++) {
                 System.out.print("Do you want Player " + (i + 1) + " to be a bot? (y/n): ");
                 String isBotResponse = sc.nextLine().trim().toLowerCase();
@@ -50,19 +48,16 @@ public class Game {
                         players.add(new Player(name));
                         break;
                     default:
-                        System.out.println("Invalid input. Please enter either y or n");
-                        inputError = true;
+                        System.out.println();
+                        System.out.println("ERROR! Invalid input. Please enter either y or n");
+                        System.out.println();
                         break;
                 }
-            }
-            // if there is an input error, continue the while loop 
-            if (inputError) {
-                continue;
             }
             
             // to check if all players all bots (all players should not be bots)
             if (botCount == playerNumber) {
-                System.out.println("At least one human player is required. Restarting player setup."); // while loop will continue and player setup will restart 
+                System.out.println("ERROR! At least one human player is required. Restarting player setup."); // while loop will continue and player setup will restart 
             } else {
                 validPlayerSetup = true;
             }
@@ -126,6 +121,23 @@ public class Game {
             for (Player winner : winners) {
                 System.out.println(winner.getName());
             }
+        }
+        System.out.println("Do you want to play again?");
+        Scanner sc = new Scanner(System.in);
+        String playAgain = sc.nextLine().trim().toLowerCase();
+        switch (playAgain) {
+            case "y":
+                System.out.println("Starting new game.");
+                Game.startGame(Menu.getPlayerCount());
+                break;
+            case "n":
+                System.out.println("You have quit the game.");
+                break;
+            default:
+                System.out.println();
+                System.out.println("ERROR! Invalid input. Please enter either y or n");
+                System.out.println();
+                break;
         }
     }
 

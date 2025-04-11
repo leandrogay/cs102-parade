@@ -23,7 +23,9 @@ public class Menu {
                             break;
 
                         case 2:
+                            System.out.println();
                             System.out.println("You have quit the game.");
+                            System.out.println();
                             break;
 
                         default:
