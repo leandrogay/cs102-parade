@@ -1,9 +1,9 @@
 package game;
 
-import java.util.*;
-import player.*;
 import card.*;
 import exception.*;
+import java.util.*;
+import player.*;
 
 public class Game {
     private Deck deck;
@@ -13,7 +13,8 @@ public class Game {
     private boolean is2Players;
     private ArrayList<Player> players = new ArrayList<>();
     private String divider = "===================================================================================";
-    private int delayDuration = 1200;
+    private int delayDuration = 500;
+    private int roundDelayDuration = 2000;
 
     public Game(int playerNumber) {
         this.deck = new Deck();
@@ -116,23 +117,6 @@ public class Game {
         return is2Players;
     }
 
-    // public int calculateScore(Player player) {
-    // // determine who has majority in each colour (with help of comparator class).
-    // // those with most cards in each color, the count will be +1. If got two or
-    // more
-    // // players that hold majority, their cards
-    // // will be flipped over(flip to face down).
-    // // face down cards will now be scored as +1, and faceup cards will be their
-    // // value.
-    // }
-    // public HashMap<Color, Integer> getMajorityOfEachCard() {
-    // HashMap<Color, ArrayList<Integer>> color_result_map = new HashMap<Color,
-    // ArrayList<Integer>>();
-    // for (Player player : players) {
-    // ArrayList<Card> collected_cards = player.getCollectedCards();
-
-    // }
-    // }
     public HashMap<Card.Color, Integer> getMajorityOfEachCard() { // returns a map mapping each card to its majority
                                                                   // holder number
         HashMap<Card.Color, ArrayList<Integer>> color_result_map = new HashMap<>();
@@ -172,7 +156,6 @@ public class Game {
     }
 
     public boolean drawPileExhausted() {
-        // deck is exhausted
         return deck.getCardCount() == 0;
     }
 
@@ -310,14 +293,12 @@ public class Game {
                 }
             }
 
-            System.out.println("Card placed is " + cardPlaced);
+            System.out.println(currentPlayer.getName() + " placed " + cardPlaced);
             table.updateParade(cardPlaced, currentPlayer);
 
-            // 6. Provide feedback - "Cards collected: 1red, 7blue, 8yellow" DONE
-
-            this.displayCollected(currentPlayer);
-            System.out.println();
             this.displayTable();
+            this.displayCollected(currentPlayer);
+            DisplayUtility.printLine(1);
 
             // Draw card for player if not last round
             if (!isLastRound) {
@@ -331,8 +312,17 @@ public class Game {
                 }
 
                 // 7. Current deck count
-                System.out.println("Current deck count is " + deck.getCardCount());
+                DisplayUtility.printLine(2);
+                DisplayUtility.printDeckCount(deck.getCardCount());
+                DisplayUtility.printLine(2);
             }
+
+            try {
+                Thread.sleep(roundDelayDuration);
+            } catch (Exception e) {
+                // Swallow exception
+            }
+
         }
     }
 

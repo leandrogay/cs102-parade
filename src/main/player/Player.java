@@ -1,7 +1,7 @@
 package player;
 
-import java.util.*;
 import card.*;
+import java.util.*;
 
 public class Player {
     private String playerName;
@@ -22,12 +22,12 @@ public class Player {
         for (Card c : playerHand) {
             if (c.equals(card)) {
                 playerHand.remove(c);
-                System.out.println(c + " removed from hand");
+                // System.out.println(c + " removed from hand");
                 return;
             }
         }
 
-        System.out.println("Card not removed");
+        System.out.println("***Card not removed");
     
     }
 
