@@ -63,7 +63,7 @@ public class DisplayUtility {
      * @param title The title of the display.
      * @param cards The list of cards to display.
      */
-    public static void displayCardsAsArt(String title, ArrayList<Card> cards, boolean printIndex) {
+    public static void displayCardsAsArt(String title, List<Card> cards, boolean printIndex) {
         printDivider(title);
 
         if (cards.isEmpty()) {

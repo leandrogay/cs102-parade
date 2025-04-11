@@ -5,9 +5,9 @@ import card.*;
 import player.Player;
 
 public class Table{
-    enum Direction {LEFT_TO_RIGHT, RIGHT_TO_LEFT};
+    enum Direction {LEFT_TO_RIGHT, RIGHT_TO_LEFT}
 
-    private ArrayList<Card> parade;
+    private List<Card> parade;
     private Direction direction;
 
     // table will be empty at the start of the game
@@ -21,14 +21,14 @@ public class Table{
         parade.add(card);
     }
 
-    public ArrayList<Card> getParade(){
+    public List<Card> getParade(){
         if (direction == Direction.LEFT_TO_RIGHT){
             return parade;
 
 
         //reverses the order of cards if direction is from right to left
         } else{                                                     
-            ArrayList<Card> reversed = new ArrayList<>(parade);
+            List<Card> reversed = new ArrayList<>(parade);
             Collections.reverse(reversed);
             return reversed;
         }
@@ -115,11 +115,7 @@ public class Table{
     }
 
     public boolean checkRemovalCondition(Card currentCard, Card cardPlaced) {
-        if (currentCard.getColor() == cardPlaced.getColor() || currentCard.getValue() <= cardPlaced.getValue()) {
-            return true;
-        } else {
-            return false;
-        }
+        return currentCard.getColor() == cardPlaced.getColor() || currentCard.getValue() <= cardPlaced.getValue();
     }
 
 }

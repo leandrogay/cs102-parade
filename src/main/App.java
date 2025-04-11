@@ -1,8 +1,6 @@
 import java.util.*;
 
-import card.*;
-import player.*;
-import game.*;
+import game.Game;
 
 public class App {
     public static void main(String[] args) {
@@ -46,7 +44,7 @@ public class App {
             game.conductRound();
             game.conductScoringRound();
 
-            ArrayList<Player> players = game.getPlayers();
+            List<Player> players = game.getPlayers();
             DisplayUtility.printDivider("SCORES");
 
             for (Player p : players) {
@@ -54,7 +52,7 @@ public class App {
                 game.displayCollected(p);
             }
 
-            ArrayList<Player> winners = game.getWinner();
+            List<Player> winners = game.getWinner();
             DisplayUtility.printDivider("WINNERS");
             System.out.println("WINNERS: ");
 

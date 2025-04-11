@@ -1,10 +1,11 @@
 package card;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    private ArrayList<Card> cards;
+    private List<Card> cards;
     private int cardCount;
     private boolean isDrawable = true;
 
@@ -37,7 +38,7 @@ public class Deck {
         }
     }
 
-    public ArrayList<Card> getDeck() {
+    public List<Card> getDeck() {
         return cards;
     }
 

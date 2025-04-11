@@ -9,8 +9,8 @@ public class BotPlayer extends Player {
         super(name);
     }
 
-    public Card cardToPlay(ArrayList<Card> parade){
-        ArrayList<Card> botHand = getPlayerHand(); // get hand of cards for bot 
+    public Card cardToPlay(List<Card> parade){
+        List<Card> botHand = getPlayerHand(); // get hand of cards for bot 
         for (Card c : botHand) {
             if (c.getValue() > 0) {
                 return c; // choose any non-zero value card
@@ -24,11 +24,10 @@ public class BotPlayer extends Player {
         Card playCard = cardToPlay(game.getParade());
         if (playCard == null) {
             return;
-        } else {
-            System.out.println(getName() + " plays: " + playCard);
-            getPlayerHand();
-            game.collectCardsFromParade(this, playCard);
-        }
+        } 
+        System.out.println(getName() + " plays: " + playCard);
+        getPlayerHand();
+        game.collectCardsFromParade(this, playCard);
     }
 }
 

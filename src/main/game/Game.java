@@ -11,8 +11,7 @@ public class Game {
     private int playerNumber;
     private int botCount;
     private boolean is2Players;
-    private ArrayList<Player> players = new ArrayList<>();
-    private String divider = "===================================================================================";
+    private List<Player> players = new ArrayList<>();
     private int delayDuration = 500;
     private int roundDelayDuration = 2000;
 
@@ -105,11 +104,11 @@ public class Game {
         }
     }
 
-    public ArrayList<Card> getDeck() {
+    public List<Card> getDeck() {
         return deck.getDeck();
     }
 
-    public ArrayList<Card> getParade() {
+    public List<Card> getParade() {
         return table.getParade();
     }
 
@@ -119,29 +118,29 @@ public class Game {
 
     public HashMap<Card.Color, Integer> getMajorityOfEachCard() { // returns a map mapping each card to its majority
                                                                   // holder number
-        HashMap<Card.Color, ArrayList<Integer>> color_result_map = new HashMap<>();
+        Map<Card.Color, List<Integer>> colorResultMap = new HashMap<>();
         for (Card.Color color : Card.Color.values()) {
-            color_result_map.put(color, new ArrayList<>());
+            colorResultMap.put(color, new ArrayList<>());
             for (Player player : players) {
-                HashMap<Card.Color, Integer> player_collection = player.getCardCollection();
-                if (player_collection.containsKey(color)) { // player collection possesses a card of that color
-                    color_result_map.get(color).add(player_collection.get(color));
+                HashMap<Card.Color, Integer> playerCollection = player.getCardCollection();
+                if (playerCollection.containsKey(color)) { // player collection possesses a card of that color
+                    colorResultMap.get(color).add(playerCollection.get(color));
                 }
             }
         }
-        HashMap<Card.Color, Integer> color_majority_map = new HashMap<>();
-        color_result_map.forEach((color, color_num_array) -> {
-            if (!color_num_array.isEmpty()) {
-                Integer max_color = Collections.max(color_num_array);
-                color_majority_map.put(color, max_color);
+        HashMap<Card.Color, Integer> colorMajorityMap = new HashMap<>();
+        colorResultMap.forEach((color, colorNumArray) -> {
+            if (!colorNumArray.isEmpty()) {
+                Integer max_color = Collections.max(colorNumArray);
+                colorMajorityMap.put(color, max_color);
             } else {
-                color_majority_map.put(color, 0);
+                colorMajorityMap.put(color, 0);
             }
         });
-        return color_majority_map;
+        return colorMajorityMap;
     }
 
-    public ArrayList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
@@ -177,8 +176,8 @@ public class Game {
         // Changed direction to make it easier for removal condition.
         table.changeDirection();
 
-        ArrayList<Card> parade = table.getParade();
-        ArrayList<Card> cardsToCollect = new ArrayList<>();
+        List<Card> parade = table.getParade();
+        List<Card> cardsToCollect = new ArrayList<>();
 
         int startIndex = Math.max(0, playedCard.getValue() - 1);
         for (int i = startIndex; i < parade.size(); i++) {
@@ -210,7 +209,7 @@ public class Game {
         System.out.println(player.getName() + " collected: " + cardsToCollect);
     }
 
-    public ArrayList<Player> getWinner() {
+    public List<Player> getWinner() {
         List<Integer> scores = tabulateScore();
         int lowestScore = Collections.min(scores); // Find the lowest score
         ArrayList<Player> lowestScorePlayers = new ArrayList<>();
@@ -226,13 +225,13 @@ public class Game {
 
         // TIE BREAKER
         // Still returns an array list in case of another tie
-        ArrayList<Integer> cardCounts = new ArrayList<>();
+        List<Integer> cardCounts = new ArrayList<>();
         for (Player p : lowestScorePlayers){
             cardCounts.add(p.getCollectedCards().size());
         }
         int lowestCardCount = Collections.min(cardCounts);
 
-        ArrayList<Player> winners = new ArrayList<>();
+        List<Player> winners = new ArrayList<>();
         for (Player p : lowestScorePlayers){
             if (p.getCollectedCards().size() == lowestCardCount){
                 winners.add(p);
@@ -244,16 +243,15 @@ public class Game {
 
     public void conductRound() {
         System.out.println();
-        for (int currPlayerIndex = 0; currPlayerIndex < players.size(); currPlayerIndex++) {
+        for (Player currentPlayer : players) {
 
             boolean isLastRound = this.checkLastRound();
 
             if (isLastRound) {
                 DisplayUtility.printDivider("LAST ROUND");
             }
-            // set currPlayer to i so that it can rotate between players
 
-            Player currentPlayer = players.get(currPlayerIndex);
+            // Displaying the current player 
             System.out.println("Current Player: " + currentPlayer.getName());
 
             this.displayTable();
@@ -264,10 +262,10 @@ public class Game {
             Card cardPlaced = null;
             Scanner inputScanner = new Scanner(System.in);
 
-            if (currentPlayer instanceof BotPlayer) { // instantiate bot player
-                cardPlaced = ((BotPlayer) currentPlayer).cardToPlay(table.getParade());
+            if (currentPlayer instanceof BotPlayer bot) { // instantiate bot player
+                cardPlaced = bot.cardToPlay(table.getParade());
                 currentPlayer.removeFromHand(cardPlaced);
-                System.out.println("Bot " + currentPlayer.getName() + " played: " + cardPlaced);
+                System.out.println("Bot " + bot.getName() + " played: " + cardPlaced);
             } else {
                 boolean validCard = false;
 
@@ -285,7 +283,7 @@ public class Game {
                         }
 
                     } catch (InputMismatchException e) {
-                        System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
+                        System.out.println("Error: Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
                         inputScanner.nextLine();
                     } catch (Exception e) {
                         System.out.println("Error: " + e.getMessage());
@@ -328,7 +326,7 @@ public class Game {
 
     // Helper functions
     public void displayTable() {
-        ArrayList<Card> tableCards = table.getParade();
+        List<Card> tableCards = table.getParade();
         DisplayUtility.displayCardsAsArt("TABLE", tableCards, false);
 
         try {
@@ -377,10 +375,7 @@ public class Game {
 
     public void conductScoringRound() {
         // first prompt the user to discard two cards
-        for (int currPlayerIndex = 0; currPlayerIndex < players.size(); currPlayerIndex++) {
-            // set currPlayer to i so that it can rotate between players
-
-            Player currentPlayer = players.get(currPlayerIndex);
+        for (Player currentPlayer : players) {
             System.out.println("Current Player: " + currentPlayer.getName());
 
 
@@ -413,7 +408,7 @@ public class Game {
                         }
 
                     } catch (InputMismatchException e) {
-                        System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
+                        System.out.println("Error: Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
                         inputScanner.nextLine();
                     } catch (Exception e) {
                         System.out.println("Error: " + e.getMessage());
@@ -441,7 +436,7 @@ public class Game {
                         }
 
                     } catch (InputMismatchException e) {
-                        System.out.println("Error: Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
+                        System.out.println("Error: Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
                         inputScanner.nextLine();
                     } 
                 }
@@ -480,7 +475,7 @@ public class Game {
     public boolean checkValidCardPlacement(int cardNumber, Player currentPlayer) {
 
         if (cardNumber < 1 || cardNumber > currentPlayer.getPlayerHand().size()) {
-            throw new CardException("Invalid card value! Must be between 1 and " + (currentPlayer.getPlayerHand().size()));
+            throw new CardException("Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
         }
 
         return true;
