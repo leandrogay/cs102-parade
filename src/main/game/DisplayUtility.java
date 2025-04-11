@@ -1,7 +1,7 @@
 package game;
 
-import java.util.*;
 import card.*;
+import java.util.*;
 
 public class DisplayUtility {
     private static final String DIVIDER = "===================================================================================";
@@ -46,6 +46,16 @@ public class DisplayUtility {
         }
     }
 
+    public static void printDeckCount(int deckCount) {
+        printDivider(deckCount + " cards left");
+    }
+
+    public static void printLine(int numOfLines) {
+        for (int i = 0 ; i < numOfLines ; i ++){
+            System.out.println();
+        }
+    }
+ 
     /**
      * Displays a list of cards as ASCII art horizontally, showing only color and number.
      * Also displays the index of each card below the ASCII art, centered under each card.
