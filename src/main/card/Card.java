@@ -7,6 +7,7 @@ public class Card {
 
     private final Color color;
     private final int value;
+    private boolean isFlipped = false;
 
     public Card(Color color, int value) {
         this.color = color;
@@ -19,6 +20,14 @@ public class Card {
 
     public int getValue() {
         return value;
+    }
+
+    public boolean getIsFlipped() {
+        return isFlipped;
+    }
+
+    public void setIsFlipped(boolean isFlipped) {
+        this.isFlipped = isFlipped;
     }
 
     @Override
