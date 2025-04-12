@@ -10,8 +10,8 @@ public class Table{
     private List<Card> parade;
     private Direction direction;
 
-    // table will be empty at the start of the game
-    // default direction is from left to right
+    // Table will be empty at the start of the game
+    // Default direction is from left to right
     public Table(){
         this.parade = new ArrayList<>(); 
         this.direction = Direction.LEFT_TO_RIGHT; 
@@ -26,7 +26,7 @@ public class Table{
             return parade;
 
 
-        //reverses the order of cards if direction is from right to left
+        // Reverses the order of cards if direction is from right to left
         } else{                                                     
             List<Card> reversed = new ArrayList<>(parade);
             Collections.reverse(reversed);
@@ -49,7 +49,6 @@ public class Table{
         }
     }
 
-
     public void updateParade(Card cardPlaced, Player currentPlayer) {
 
         if (cardPlaced == null) {
@@ -58,9 +57,7 @@ public class Table{
         }
 
         int oldParadeSize = parade.size();
-
         parade.add(cardPlaced);
-
 
         if (cardPlaced.getValue() == 0) {
             removeCards(0, cardPlaced, currentPlayer);
@@ -71,21 +68,8 @@ public class Table{
             return;
         }
 
-
         this.removeCards(cardPlaced.getValue(), cardPlaced, currentPlayer);
-
-        /*
-         * 1. Compare cardPlaced value with current number of cards.
-         *  2. if cardPlaced value is 0, all cards enter removal.
-         * if cardPlaced value is less than or equal to number of cards,
-         * no need do anything, return.
-         * if cardPlaced value is more than the number of cards,
-         * removeCards();
-         * update players card collection
-         * move up the cards in parade.
-         */
-
-         parade = new ArrayList<>(parade); // Rebuild list to maintain order
+         parade = new ArrayList<>(parade); // Rebuilds list to maintain order
 
     }
 
@@ -101,8 +85,7 @@ public class Table{
             } 
         }
 
-
-        //remove all the cards in removal pile.
+        // Removes all cards in the removal pile.
         for (Card toRemoveCard : removalPile) {
             currentPlayer.collectCard(toRemoveCard);
             this.removeCard(toRemoveCard);
@@ -113,7 +96,6 @@ public class Table{
         } else {
             System.out.println("Cards removed are: " + removalPile);
         }
-
     }
 
     public boolean checkRemovalCondition(Card currentCard, Card cardPlaced) {

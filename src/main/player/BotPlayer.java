@@ -1,8 +1,8 @@
 package player;
 
-import java.util.*;
 import card.*;
 import game.*;
+import java.util.*;
 
 public class BotPlayer extends Player {
     public BotPlayer(String name){
@@ -10,14 +10,14 @@ public class BotPlayer extends Player {
     }
 
     public Card cardToPlay(List<Card> parade){
-        List<Card> botHand = getPlayerHand(); // get hand of cards for bot 
+        List<Card> botHand = getPlayerHand();
         for (Card c : botHand) {
             if (c.getValue() > 0) {
-                return c; // choose any non-zero value card
+                return c; // Chooses any non-zero value card
             }
         }
-        Collections.shuffle(botHand); // shuffle the hand so that the next line takes in // do I need this ?????
-        return botHand.get(0); // if card is 0 value, choose any
+        Collections.shuffle(botHand); // Shuffles the hand to randomise the card selection
+        return botHand.get(0); 
     }
 
     public void botTurn(Game game){
@@ -32,17 +32,17 @@ public class BotPlayer extends Player {
 
     public void botDiscard() {
         List<Card> hand = getPlayerHand();
-        // to prevent any error if the bot has less than 2 cards 
+        // Prevents any error if the bot has less than 2 cards 
         if (hand.size() < 2) {
             return;  
         }
-        // sort bot's hand by value in descending order using CardComparator
+        // Sort bot's hand by value in descending order using CardComparator
         Collections.sort(hand, Collections.reverseOrder(new CardComparator()));
         
-        // remove first card to be discarded 
+        // Removes first card to be discarded 
         removeFromHand(hand.get(0));
         System.out.println(getName() + " discarded: " + hand.get(0));
-        // returns second card to be discarded 
+        // Returns second card to be discarded 
         removeFromHand(hand.get(1));
         System.out.println(getName() + " discarded: " + hand.get(1));
     }
