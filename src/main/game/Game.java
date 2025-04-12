@@ -501,6 +501,8 @@ public class Game {
             currentPlayer.calculateScore(majorityCardMap, is2Players);
         }
     }
+    
+    }
 
     public boolean checkValidCardPlacement(int cardNumber, Player currentPlayer) {
         try {
