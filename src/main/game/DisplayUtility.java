@@ -71,7 +71,11 @@ public class DisplayUtility {
 
             topLine.append("+-------+  ");
             colorLine.append(String.format("| %s%-6s%s|  ", colorCode, colorName, DEFAULT_COLOR));
-            valueLine.append(String.format("| %s%-6s%s|  ", colorCode, value, DEFAULT_COLOR));
+            if (card.getIsFlipped()) {
+                valueLine.append(String.format("| %s%-6s%s|  ", colorCode, " ", DEFAULT_COLOR));
+            } else{
+                valueLine.append(String.format("| %s%-6s%s|  ", colorCode, value, DEFAULT_COLOR));
+            }
             bottomLine.append("+-------+  ");
 
             int cardWidth = 9;
