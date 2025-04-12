@@ -60,19 +60,18 @@ public class Player {
 
 
     public void calculateScore(HashMap<Card.Color, Integer> majorityCardMap, boolean is2Players, Map<Card.Color, Integer> oppCardCollection) {
-        score = 0; // reset score
+        score = 0; 
         List<Card.Color> flippedCards;
         if (is2Players) {
-            // get oppCardCollection here
             flippedCards = getFlippedCardsColor2Players(oppCardCollection);
         } else {
             flippedCards = getFlippedCardsColorManyPlayers(majorityCardMap);
         }
         for (Card card : collectedCards) {
-            if (flippedCards.contains(card.getColor())) { // the card is flipped down -> score +1
+            if (flippedCards.contains(card.getColor())) { 
                 card.setIsFlipped(true);
                 score += 1;
-            } else { // card is flipped up -> score +num on card
+            } else { 
                 score += card.getValue();
             }
         } 
@@ -82,7 +81,7 @@ public class Player {
     }
 
 
-    public int getNumColors() { // return the number of colors in collected hand
+    public int getNumColors() { 
         List<Card.Color> checkColors;
         checkColors = new ArrayList<>();
         for (Card card : collectedCards) {
@@ -93,7 +92,7 @@ public class Player {
         return checkColors.size();
     }
 
-    public Map<Card.Color, Integer> getCardCollection() { // return a mapping of color player obtained with the number of cards of that color
+    public Map<Card.Color, Integer> getCardCollection() { 
         Map<Card.Color, Integer> cardMap = new HashMap<>();
         for (Card card : collectedCards) {
             Card.Color card_color= card.getColor();
@@ -106,15 +105,14 @@ public class Player {
         return cardMap;
     }
 
-    // FOR WHEN THERE ARE > 2 PLAYERS
-    public List<Card.Color> getFlippedCardsColorManyPlayers(Map<Card.Color, Integer> majorityCardMap) { // retrieve majority_card_map from getMajorityOfEachCard() in Game class
+    public List<Card.Color> getFlippedCardsColorManyPlayers(Map<Card.Color, Integer> majorityCardMap) {
         Map<Card.Color, Integer> personalCollectionMap = getCardCollection();
         List<Card.Color> flippedCards = new ArrayList<>();
         personalCollectionMap.forEach((color, numCards) -> {
             if (majorityCardMap.containsKey(color)) {
                 Integer maxNumColor = majorityCardMap.get(color);
                 if (maxNumColor != -1) {
-                    if (Objects.equals(maxNumColor, numCards)) { // is the max 
+                    if (Objects.equals(maxNumColor, numCards)) {
                         flippedCards.add(color);
                     }
                 }
@@ -123,17 +121,16 @@ public class Player {
         return flippedCards;
     }
 
-    // FOR WHEN THERE ARE 2 PLAYERS
-    public List<Card.Color> getFlippedCardsColor2Players(Map<Card.Color, Integer> oppCardCollection) { // retrieve opponent's card collection in Game class if possible
+    public List<Card.Color> getFlippedCardsColor2Players(Map<Card.Color, Integer> oppCardCollection) { 
         Map<Card.Color, Integer> personalCollectionMap = getCardCollection();
         List<Card.Color> flippedCards = new ArrayList<>();
         personalCollectionMap.forEach((color, numCards) -> {
-            if (oppCardCollection.containsKey(color)) { // opponent's hand also possess the card that player has
+            if (oppCardCollection.containsKey(color)) { 
                 Integer oppNumCards = oppCardCollection.get(color);
-                if (numCards - oppNumCards >= 2) { // player's card hand is more than oppenent's by at least 2 
+                if (numCards - oppNumCards >= 2) {
                     flippedCards.add(color);
                 }
-            } else { // opponent do not possess that hand, check if player has 2 or more cards 
+            } else { 
                 if (numCards >= 2) {
                     flippedCards.add(color);
                 }
