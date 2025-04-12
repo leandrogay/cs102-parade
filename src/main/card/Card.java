@@ -1,8 +1,10 @@
 package card;
 
 public class Card {
-    public enum Color { RED, BLUE, GREEN, YELLOW, PURPLE, BLACK }
-    
+    public enum Color {
+        RED, BLUE, GREEN, YELLOW, PURPLE, BLACK
+    }
+
     private final Color color;
     private final int value;
 
@@ -25,11 +27,11 @@ public class Card {
     }
 
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || this.getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null || this.getClass() != obj.getClass())
+            return false;
         Card card = (Card) obj;
         return value == card.value && color == card.color;
     }
-
-
 }
