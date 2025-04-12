@@ -497,11 +497,11 @@ public class Game {
             this.displayCollected(currentPlayer);
 
             // calculate the scores
-            HashMap<Card.Color, Integer> majorityCardMap = getMajorityOfEachCard();
-            currentPlayer.calculateScore(majorityCardMap, is2Players);
+            // HashMap<Card.Color, Integer> majorityCardMap = getMajorityOfEachCard();
+            // currentPlayer.calculateScore(majorityCardMap, is2Players);
         }
     }
-    
+    // needs to have its own loop -> need to loop through every player so that the majority of each card is standardised
     }
 
     public boolean checkValidCardPlacement(int cardNumber, Player currentPlayer) {
