@@ -1,8 +1,8 @@
 package player;
 
-import java.util.*;
 import card.Card;
 import card.CardComparator;
+import java.util.*;
 
 public class Player {
     private String playerName;
@@ -50,6 +50,7 @@ public class Player {
     }
 
     public List<Card> getCollectedCards() {
+        Collections.sort(collectedCards, new CardComparator());
         return collectedCards;
     }
 
