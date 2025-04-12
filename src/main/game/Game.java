@@ -165,28 +165,55 @@ public class Game {
         return is2Players;
     }
 
-    public HashMap<Card.Color, Integer> getMajorityOfEachCard() { // Returns a map mapping each card to its majority
-                                                                  // holder number
-        Map<Card.Color, List<Integer>> colorResultMap = new HashMap<>();
+    // public HashMap<Card.Color, Integer> getMajorityOfEachCard() { // Returns a map mapping each card to its majority
+    //                                                               // holder number
+    //     Map<Card.Color, List<Integer>> colorResultMap = new HashMap<>();
+    //     for (Card.Color color : Card.Color.values()) {
+    //         colorResultMap.put(color, new ArrayList<>());
+    //         for (Player player : players) {
+    //             Map<Card.Color, Integer> playerCollection = player.getCardCollection();
+    //             if (playerCollection.containsKey(color)) { // Player's collection contains a card of that color
+    //                 colorResultMap.get(color).add(playerCollection.get(color));
+    //             }
+    //         }
+    //     }
+
+    //     HashMap<Card.Color, Integer> colorMajorityMap = new HashMap<>();
+    //     colorResultMap.forEach((color, colorNumArray) -> {
+    //         if (!colorNumArray.isEmpty()) {
+    //             Integer max_color = Collections.max(colorNumArray);
+    //             colorMajorityMap.put(color, max_color);
+    //         } else {
+    //             colorMajorityMap.put(color, 0);
+    //         }
+    //     });
+    //     return colorMajorityMap;
+    // }
+    public HashMap<Card.Color, Integer> getMajorityOfEachCard() {
+        HashMap<Card.Color, Integer> colorMajorityMap = new HashMap<>();
+    
         for (Card.Color color : Card.Color.values()) {
-            colorResultMap.put(color, new ArrayList<>());
+            int maxCount = 0;
+            int countOfMaxPlayers = 0;
+    
             for (Player player : players) {
-                Map<Card.Color, Integer> playerCollection = player.getCardCollection();
-                if (playerCollection.containsKey(color)) { // Player's collection contains a card of that color
-                    colorResultMap.get(color).add(playerCollection.get(color));
+                int count = player.getCardCollection().getOrDefault(color, 0);
+    
+                if (count > maxCount) {
+                    maxCount = count;
+                    countOfMaxPlayers = 1;
+                } else if (count == maxCount && maxCount > 0) {
+                    countOfMaxPlayers++;
                 }
             }
-        }
-
-        HashMap<Card.Color, Integer> colorMajorityMap = new HashMap<>();
-        colorResultMap.forEach((color, colorNumArray) -> {
-            if (!colorNumArray.isEmpty()) {
-                Integer max_color = Collections.max(colorNumArray);
-                colorMajorityMap.put(color, max_color);
+    
+            if (countOfMaxPlayers > 1) {
+                colorMajorityMap.put(color, -1); // -1 indicates a tie
             } else {
-                colorMajorityMap.put(color, 0);
+                colorMajorityMap.put(color, maxCount);
             }
-        });
+        }
+        System.out.println(colorMajorityMap);
         return colorMajorityMap;
     }
 

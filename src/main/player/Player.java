@@ -111,8 +111,10 @@ public class Player {
         personalCollectionMap.forEach((color, numCards) -> {
             if (majorityCardMap.containsKey(color)) {
                 Integer maxNumColor = majorityCardMap.get(color);
-                if (Objects.equals(maxNumColor, numCards)) { // is the max 
-                    flippedCards.add(color);
+                if (maxNumColor != -1) {
+                    if (Objects.equals(maxNumColor, numCards)) { // is the max 
+                        flippedCards.add(color);
+                    }
                 }
             }
         });
@@ -130,7 +132,7 @@ public class Player {
                     flippedCards.add(color);
                 }
             } else { // opponent do not possess that hand, check if player has 2 or more cards 
-                if (numCards > 1) {
+                if (numCards >= 2) {
                     flippedCards.add(color);
                 }
             }
