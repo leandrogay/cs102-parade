@@ -29,5 +29,22 @@ public class BotPlayer extends Player {
         getPlayerHand();
         game.collectCardsFromParade(this, playCard);
     }
+
+    public void botDiscard() {
+        List<Card> hand = getPlayerHand();
+        // to prevent any error if the bot has less than 2 cards 
+        if (hand.size() < 2) {
+            return;  
+        }
+        // sort bot's hand by value in descending order using CardComparator
+        Collections.sort(hand, Collections.reverseOrder(new CardComparator()));
+        
+        // remove first card to be discarded 
+        removeFromHand(hand.get(0));
+        System.out.println(getName() + " discarded: " + hand.get(0));
+        // returns second card to be discarded 
+        removeFromHand(hand.get(1));
+        System.out.println(getName() + " discarded: " + hand.get(1));
+    }
 }
 
