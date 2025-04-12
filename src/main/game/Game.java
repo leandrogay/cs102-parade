@@ -109,9 +109,9 @@ public class Game {
             List<Player> players = game.getPlayers();
             DisplayUtility.printDivider("SCORES");
 
-            for (Player p : players) {
-                System.out.println("score for " + p.getName() + " is " + p.getScore());
-                game.displayCollected(p);
+            for (Player player : players) {
+                System.out.println("score for " + player.getName() + " is " + player.getScore());
+                game.displayCollected(player);
             }
 
             List<Player> winners = game.getWinner();
