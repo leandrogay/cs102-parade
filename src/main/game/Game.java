@@ -12,8 +12,8 @@ public class Game {
     private int botCount;
     private boolean is2Players;
     private List<Player> players = new ArrayList<>();
-    private int delayDuration = 500;
-    private int roundDelayDuration = 2000;
+    private int delayDuration = 50;
+    private int roundDelayDuration = 20;
 
     public Game(int playerNumber) {
         this.deck = new Deck();
@@ -307,7 +307,7 @@ public class Game {
             if (currentPlayer instanceof BotPlayer bot) { // instantiate bot player
                 cardPlaced = bot.cardToPlay(table.getParade());
                 currentPlayer.removeFromHand(cardPlaced);
-                System.out.println("Bot " + bot.getName() + " played: " + cardPlaced);
+                System.out.println(bot.getName() + " played: " + cardPlaced);
             } else {
                 boolean validCard = false;
 
