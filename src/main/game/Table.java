@@ -76,10 +76,10 @@ public class Table{
     public void removeCards(int cardValue, Card cardPlaced, Player currentPlayer) {
         List<Card> removalPile = new ArrayList<>();
 
-        //starts at parade.size() - 2 because last index is parade.size() - 1, and minus another one because you exclude the just added card.
+        // Starts at parade.size() - 2 because last index is parade.size() - 1, and minus another one because you exclude the just added card.
         for (int i = 0; i < parade.size() - 1 - cardValue; i++) {
             Card currentCard = parade.get(i);
-            //remove card with same color, and cards with value less than or equal to value of played card.card
+            // Removes card with same color, and cards with value less than or equal to value of played card.card
             if (this.checkRemovalCondition(currentCard, cardPlaced)) {
                 removalPile.add(currentCard);
             } 
