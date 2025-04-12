@@ -468,7 +468,7 @@ public class Game {
 
         // Calculate the scores
         HashMap<Card.Color, Integer> majorityCardMap = getMajorityOfEachCard();
-        if (players.size() <= 2) {
+        if (players.size() == 2) {
             Player player1 = players.get(0);
             Player player2 = players.get(1);
             player1.calculateScore(null, true, player2.getCardCollection());
