@@ -58,12 +58,13 @@ public class Player {
         return score;
     }
 
-    // condition for if there are > 2 players
-    public void calculateScore(HashMap<Card.Color, Integer> majorityCardMap, boolean is2Players) {
+
+    public void calculateScore(HashMap<Card.Color, Integer> majorityCardMap, boolean is2Players, Map<Card.Color, Integer> oppCardCollection) {
         score = 0; // reset score
         List<Card.Color> flippedCards;
         if (is2Players) {
-            flippedCards = getFlippedCardsColor2Players(majorityCardMap);
+            // get oppCardCollection here
+            flippedCards = getFlippedCardsColor2Players(oppCardCollection);
         } else {
             flippedCards = getFlippedCardsColorManyPlayers(majorityCardMap);
         }
@@ -129,7 +130,7 @@ public class Player {
         personalCollectionMap.forEach((color, numCards) -> {
             if (oppCardCollection.containsKey(color)) { // opponent's hand also possess the card that player has
                 Integer oppNumCards = oppCardCollection.get(color);
-                if (numCards >= oppNumCards + 2) { // player's card hand is more than oppenent's by at least 2 
+                if (numCards - oppNumCards >= 2) { // player's card hand is more than oppenent's by at least 2 
                     flippedCards.add(color);
                 }
             } else { // opponent do not possess that hand, check if player has 2 or more cards 

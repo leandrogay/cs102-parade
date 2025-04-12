@@ -10,7 +10,6 @@ public class Game {
     private Table table;
     private int playerNumber;
     private int botCount;
-    private boolean is2Players;
     private List<Player> players = new ArrayList<>();
     private int cardsPerPlayer = 5;
     private int cardsPerTable = 6;
@@ -153,34 +152,7 @@ public class Game {
         return table.getParade();
     }
 
-    public boolean getIs2Players() {
-        return is2Players;
-    }
 
-    // public HashMap<Card.Color, Integer> getMajorityOfEachCard() { // Returns a map mapping each card to its majority
-    //                                                               // holder number
-    //     Map<Card.Color, List<Integer>> colorResultMap = new HashMap<>();
-    //     for (Card.Color color : Card.Color.values()) {
-    //         colorResultMap.put(color, new ArrayList<>());
-    //         for (Player player : players) {
-    //             Map<Card.Color, Integer> playerCollection = player.getCardCollection();
-    //             if (playerCollection.containsKey(color)) { // Player's collection contains a card of that color
-    //                 colorResultMap.get(color).add(playerCollection.get(color));
-    //             }
-    //         }
-    //     }
-
-    //     HashMap<Card.Color, Integer> colorMajorityMap = new HashMap<>();
-    //     colorResultMap.forEach((color, colorNumArray) -> {
-    //         if (!colorNumArray.isEmpty()) {
-    //             Integer max_color = Collections.max(colorNumArray);
-    //             colorMajorityMap.put(color, max_color);
-    //         } else {
-    //             colorMajorityMap.put(color, 0);
-    //         }
-    //     });
-    //     return colorMajorityMap;
-    // }
     public HashMap<Card.Color, Integer> getMajorityOfEachCard() {
         HashMap<Card.Color, Integer> colorMajorityMap = new HashMap<>();
     
@@ -493,10 +465,19 @@ public class Game {
     
             this.displayCollected(currentPlayer);
         }
+
         // Calculate the scores
         HashMap<Card.Color, Integer> majorityCardMap = getMajorityOfEachCard();
-        for (Player currentPlayer : players) {
-        currentPlayer.calculateScore(majorityCardMap, is2Players);
+        if (players.size() <= 2) {
+            Player player1 = players.get(0);
+            Player player2 = players.get(1);
+            player1.calculateScore(null, true, player2.getCardCollection());
+            player2.calculateScore(null, true, player1.getCardCollection());
+        }
+        else {
+            for (Player currentPlayer : players) {
+                currentPlayer.calculateScore(majorityCardMap, false, null);
+            }
         }
     }
 
