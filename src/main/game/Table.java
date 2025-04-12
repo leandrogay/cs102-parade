@@ -1,7 +1,7 @@
 package game;
 
-import java.util.*;
 import card.*;
+import java.util.*;
 import player.Player;
 
 public class Table{
@@ -108,9 +108,11 @@ public class Table{
             this.removeCard(toRemoveCard);
         }
 
-        System.out.println("Cards removed are: " + removalPile);
-
-
+        if (removalPile.isEmpty()) {
+            System.out.println("No cards removed");
+        } else {
+            System.out.println("Cards removed are: " + removalPile);
+        }
 
     }
 
