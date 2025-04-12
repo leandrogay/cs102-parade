@@ -69,6 +69,7 @@ public class Player {
         }
         for (Card card : collectedCards) {
             if (flippedCards.contains(card.getColor())) { // the card is flipped down -> score +1
+                card.setIsFlipped(true);
                 score += 1;
             } else { // card is flipped up -> score +num on card
                 score += card.getValue();
