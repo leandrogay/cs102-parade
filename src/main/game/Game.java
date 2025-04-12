@@ -424,12 +424,12 @@ public class Game {
             int cardDiscardedIndex2 = 0;
             boolean validCard1 = false;
             boolean validCard2 = false;
-
+    
             this.displayTable();
             this.displayCollected(currentPlayer);
             DisplayUtility.printDivider("DISCARD FIRST CARD");
             this.displayHand(currentPlayer);
-
+    
             if (currentPlayer instanceof BotPlayer bot) {
                 bot.botDiscard();
             } else {
@@ -437,7 +437,7 @@ public class Game {
                 // updated collection of the player.
                 
                 Scanner inputScanner = new Scanner(System.in);
-
+    
                 while (!validCard1) { // Prompts user until they input a valid card
                     try {
                         System.out.println("Enter first card to be discarded (index of card): ");
@@ -457,50 +457,49 @@ public class Game {
                         System.out.println("ERROR! " + e.getMessage());
                         System.out.println();
                     }
-
+                }
+    
                 Card firstCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex1 - 1);
                 currentPlayer.removeFromHand(firstCardDiscarded);
                 
                 DisplayUtility.printDivider("DISCARD SECOND CARD");
                 this.displayHand(currentPlayer);
-
-                if (currentPlayer instanceof BotPlayer bot) {
-                    bot.botDiscard();
-                } else {
-                    while (!validCard2) { // Prompts user until they input a valid card
-                        try {
-                            System.out.println("Enter second card to be discarded (index of card): ");
-                            int cardNumber = inputScanner.nextInt();
-                            
-                            if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
-                                cardDiscardedIndex2 = cardNumber;
-                                validCard2 = true;
-                            }
-                        } catch (InputMismatchException e) {
-                            System.out.println();
-                            System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
-                            System.out.println();
-                            inputScanner.nextLine();
-                        } 
-                    }
+    
+                while (!validCard2) { // Prompts user until they input a valid card
+                    try {
+                        System.out.println("Enter second card to be discarded (index of card): ");
+                        int cardNumber = inputScanner.nextInt();
+                        
+                        if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
+                            cardDiscardedIndex2 = cardNumber;
+                            validCard2 = true;
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println();
+                        System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+                        System.out.println();
+                        inputScanner.nextLine();
+                    } 
                 }
-
+    
                 Card secondCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex2 - 1);
                 currentPlayer.removeFromHand(secondCardDiscarded);
             }
-
+    
             // add rest to the collection
             for (Card remainingCards : currentPlayer.getPlayerHand()) {
                 currentPlayer.collectCard(remainingCards);
             }
-
+    
             this.displayCollected(currentPlayer);
-
-            // calculate the scores
-            HashMap<Card.Color, Integer> majorityCardMap = getMajorityOfEachCard();
-            currentPlayer.calculateScore(majorityCardMap, is2Players);
+        }
+        // Calculate the scores
+        HashMap<Card.Color, Integer> majorityCardMap = getMajorityOfEachCard();
+        for (Player currentPlayer : players) {
+        currentPlayer.calculateScore(majorityCardMap, is2Players);
         }
     }
+    
 
     public boolean checkValidCardPlacement(int cardNumber, Player currentPlayer) {
         try {
