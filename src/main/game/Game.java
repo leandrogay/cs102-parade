@@ -60,15 +60,7 @@ public class Game {
             // Checks if all players are bots (all players should not be bots)
             if (botCount == playerNumber) {
                 System.out.println();
-                System.out.println("ERROR! At least one human player is required. Restarting player setup."); // while
-                                                                                                              // loop
-                                                                                                              // will
-                                                                                                              // continue
-                                                                                                              // and
-                                                                                                              // player
-                                                                                                              // setup
-                                                                                                              // will
-                                                                                                              // restart
+                System.out.println("ERROR! At least one human player is required. Restarting player setup."); 
                 System.out.println();
             } else {
                 validPlayerSetup = true;
@@ -106,9 +98,9 @@ public class Game {
         if (playerCount >= 2 && playerCount <= 6) {
             Game game = new Game(playerCount);
 
-            // while (!game.checkLastRound()) {
-            // game.conductRound(); // Conducts round while not last round
-            // }
+            while (!game.checkLastRound()) {
+            game.conductRound(); // Conducts round while not last round
+            }
 
             DisplayUtility.printDivider("LAST ROUND");
             game.conductRound();
@@ -242,8 +234,7 @@ public class Game {
             table.removeCard(c);
         }
 
-        // Sets the direction back to LEFT_TO_RIGHT and adds the played card to the
-        // parade
+        // Sets the direction back to LEFT_TO_RIGHT and adds the played card to the parade
         table.changeDirection();
         table.addCardToParade(playedCard);
 
@@ -256,7 +247,7 @@ public class Game {
 
     public List<Player> getWinner() {
         List<Integer> scores = tabulateScore();
-        int lowestScore = Collections.min(scores); // Find the lowest score
+        int lowestScore = Collections.min(scores); // Finds the lowest score
         ArrayList<Player> lowestScorePlayers = new ArrayList<>();
 
         for (Player p : players) {
@@ -268,8 +259,7 @@ public class Game {
             return lowestScorePlayers;
         }
 
-        // TIE BREAKER
-        // Still returns an array list in case of another tie
+        // TIE BREAKER - returns an ArrayList in case of another tie
         List<Integer> cardCounts = new ArrayList<>();
         for (Player p : lowestScorePlayers) {
             cardCounts.add(p.getCollectedCards().size());
@@ -282,7 +272,6 @@ public class Game {
                 winners.add(p);
             }
         }
-
         return winners;
     }
 
@@ -305,7 +294,7 @@ public class Game {
             Card cardPlaced = null;
             Scanner inputScanner = new Scanner(System.in);
 
-            if (currentPlayer instanceof BotPlayer bot) { // Instantiate bot player
+            if (currentPlayer instanceof BotPlayer bot) { // Instantiates bot player
                 cardPlaced = bot.cardToPlay(table.getParade());
                 currentPlayer.removeFromHand(cardPlaced);
                 System.out.println(bot.getName() + " played: " + cardPlaced);
@@ -345,7 +334,7 @@ public class Game {
             this.displayCollected(currentPlayer);
             DisplayUtility.printLine(1);
 
-            // Draw card for player if not last round
+            // Draws card for player if it is not the last round
             if (!isLastRound) {
                 Card drawnCard = deck.draw();
 
@@ -484,14 +473,11 @@ public class Game {
                 throw new CardException(
                         "ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
             }
-        } catch (Exception e) {
+        } catch (CardException e) {
             System.out.println(e.getMessage());
             return false;
         }
-        // catch (CardException e) {
-        // System.out.println(e.getMessage());
-        // return false;
-        // }
+
         return true;
     }
 }
