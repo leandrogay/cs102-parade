@@ -437,23 +437,26 @@ public class Game {
                 DisplayUtility.printDivider("DISCARD SECOND CARD");
                 this.displayHand(currentPlayer);
 
-                while (!validCard2) { // Prompts user until they input a valid card
-                    try {
-                        System.out.println("Enter second card to be discarded (index of card): ");
-                        int cardNumber = inputScanner.nextInt();
-                        
-                        if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
-                            cardDiscardedIndex2 = cardNumber;
-                            validCard2 = true;
-                        }
-                    } catch (InputMismatchException e) {
-                        System.out.println();
-                        System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
-                        System.out.println();
-                        inputScanner.nextLine();
-                    } 
+                if (currentPlayer instanceof BotPlayer bot) {
+                    bot.botDiscard();
+                } else {
+                    while (!validCard2) { // Prompts user until they input a valid card
+                        try {
+                            System.out.println("Enter second card to be discarded (index of card): ");
+                            int cardNumber = inputScanner.nextInt();
+                            
+                            if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
+                                cardDiscardedIndex2 = cardNumber;
+                                validCard2 = true;
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println();
+                            System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+                            System.out.println();
+                            inputScanner.nextLine();
+                        } 
+                    }
                 }
-            }
 
                 Card secondCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex2 - 1);
                 currentPlayer.removeFromHand(secondCardDiscarded);

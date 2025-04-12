@@ -30,21 +30,29 @@ public class BotPlayer extends Player {
         game.collectCardsFromParade(this, playCard);
     }
 
-    public void botDiscard() {
-        List<Card> hand = getPlayerHand();
-        // Prevents any error if the bot has less than 2 cards 
-        if (hand.size() < 2) {
-            return;  
-        }
-        // Sort bot's hand by value in descending order using CardComparator
-        Collections.sort(hand, Collections.reverseOrder(new CardComparator()));
+    // public void botDiscard() {
+    //     List<Card> hand = getPlayerHand();
+    //     // Prevents any error if the bot has less than 2 cards 
+    //     if (hand.size() < 2) {
+    //         return;  
+    //     }
+    //     // Sort bot's hand by value in descending order using CardComparator
+    //     Collections.sort(hand, Collections.reverseOrder(new CardComparator()));
         
-        // Removes first card to be discarded 
-        removeFromHand(hand.get(0));
-        System.out.println(getName() + " discarded: " + hand.get(0));
-        // Returns second card to be discarded 
-        removeFromHand(hand.get(1));
-        System.out.println(getName() + " discarded: " + hand.get(1));
+    //     // Removes first card to be discarded 
+    //     removeFromHand(hand.get(0));
+    //     System.out.println(getName() + " discarded: " + hand.get(0));
+    //     // Returns second card to be discarded 
+    //     removeFromHand(hand.get(1));
+    //     System.out.println(getName() + " discarded: " + hand.get(1));
+    // }
+
+    public void botDiscard(){
+        List<Card> botHand = getPlayerHand();
+        Collections.shuffle(botHand); // Shuffles the hand to randomise the card selection
+
+        removeFromHand(botHand.get(0));
+        System.out.println(getName() + " discarded: " + botHand.get(0));
     }
 }
 
