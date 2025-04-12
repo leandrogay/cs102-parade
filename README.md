@@ -74,7 +74,7 @@ G2T4:
 - LEANDRO GAY (leandro.gay.2023@scis.smu.edu.sg)
 - LIM ZE YUEN
 - SIM KAY WEE (kaywee.sim.2024@computing.smu.edu.sg)
-- LIN KHANT PE THEIN
+- LIN KHANT PE THEIN (kpt.lin.2024@computing.smu.edu.sg)
 
 ### Contact
 - **GitHub**: https://github.com/leandrogay/cs102-parade
