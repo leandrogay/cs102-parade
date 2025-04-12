@@ -12,20 +12,16 @@ public class Deck {
     public Deck() {
         this.cards = new ArrayList<>();
         prepDeck();
-        shuffleDeck();
         cardCount = this.cards.size();
     }
 
-    public void prepDeck() {
-        for (Card.Color color : Card.Color.values()) {
-            for (int value = 0; value <= 10; value++) {
-                cards.add(new Card(color, value));
+    public void prepDeck() {  
+        for (Card.Color color : Card.Color.values()) { // Iterates by color
+            for (int value = 0; value <= 10; value++) {  // Iterates by card values from lowest to highest (0-10)
+                cards.add(new Card(color, value)); // Adds cards into deck
             }
         }
-    }
-
-    public void shuffleDeck() {
-        Collections.shuffle(cards);
+        Collections.shuffle(cards); // Shuffles deck 
     }
 
     public Card draw() {

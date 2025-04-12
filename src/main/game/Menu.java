@@ -7,8 +7,8 @@ public class Menu {
     public static void select(){
         Scanner sc = new Scanner(System.in);
         int choice;
-        do { // do code below while choice is not 2 (choice = 2 means quit game)
-            displayHome(); // display initial options (start or quit)
+        do { // does code below while choice is not 2 (choice = 2 means quit game)
+            displayHome(); // Displays initial options (start or quit)
 
             String input = "";
             System.out.print("Please enter your choice: ");
@@ -40,7 +40,7 @@ public class Menu {
                     System.out.println();
                 }
             } 
-        } while (choice != 2); // quit game 
+        } while (choice != 2); // Quits game 
     }
 
 

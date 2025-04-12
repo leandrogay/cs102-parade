@@ -60,15 +60,7 @@ public class Game {
             // Checks if all players are bots (all players should not be bots)
             if (botCount == playerNumber) {
                 System.out.println();
-                System.out.println("ERROR! At least one human player is required. Restarting player setup."); // while
-                                                                                                              // loop
-                                                                                                              // will
-                                                                                                              // continue
-                                                                                                              // and
-                                                                                                              // player
-                                                                                                              // setup
-                                                                                                              // will
-                                                                                                              // restart
+                System.out.println("ERROR! At least one human player is required. Restarting player setup."); 
                 System.out.println();
             } else {
                 validPlayerSetup = true;
@@ -106,9 +98,9 @@ public class Game {
         if (playerCount >= 2 && playerCount <= 6) {
             Game game = new Game(playerCount);
 
-            // while (!game.checkLastRound()) {
-            // game.conductRound(); // Conducts round while not last round
-            // }
+            while (!game.checkLastRound()) {
+            game.conductRound(); // Conducts round while not last round
+            }
 
             DisplayUtility.printDivider("LAST ROUND");
             game.conductRound();
@@ -132,7 +124,7 @@ public class Game {
         }
 
         System.out.println();
-        System.out.print("Do you want to play again?: ");
+        System.out.print("Do you want to play again? (y/n): ");
         Scanner sc = new Scanner(System.in);
         String playAgain = sc.nextLine().trim().toLowerCase();
         switch (playAgain) {
@@ -269,8 +261,7 @@ public class Game {
             table.removeCard(c);
         }
 
-        // Sets the direction back to LEFT_TO_RIGHT and adds the played card to the
-        // parade
+        // Sets the direction back to LEFT_TO_RIGHT and adds the played card to the parade
         table.changeDirection();
         table.addCardToParade(playedCard);
 
@@ -283,7 +274,7 @@ public class Game {
 
     public List<Player> getWinner() {
         List<Integer> scores = tabulateScore();
-        int lowestScore = Collections.min(scores); // Find the lowest score
+        int lowestScore = Collections.min(scores); // Finds the lowest score
         ArrayList<Player> lowestScorePlayers = new ArrayList<>();
 
         for (Player p : players) {
@@ -295,8 +286,7 @@ public class Game {
             return lowestScorePlayers;
         }
 
-        // TIE BREAKER
-        // Still returns an array list in case of another tie
+        // TIE BREAKER - returns an ArrayList in case of another tie
         List<Integer> cardCounts = new ArrayList<>();
         for (Player p : lowestScorePlayers) {
             cardCounts.add(p.getCollectedCards().size());
@@ -309,7 +299,6 @@ public class Game {
                 winners.add(p);
             }
         }
-
         return winners;
     }
 
@@ -332,7 +321,7 @@ public class Game {
             Card cardPlaced = null;
             Scanner inputScanner = new Scanner(System.in);
 
-            if (currentPlayer instanceof BotPlayer bot) { // Instantiate bot player
+            if (currentPlayer instanceof BotPlayer bot) { // Instantiates bot player
                 cardPlaced = bot.cardToPlay(table.getParade());
                 currentPlayer.removeFromHand(cardPlaced);
                 System.out.println(bot.getName() + " played: " + cardPlaced);
@@ -372,7 +361,7 @@ public class Game {
             this.displayCollected(currentPlayer);
             DisplayUtility.printLine(1);
 
-            // Draw card for player if not last round
+            // Draws card for player if it is not the last round
             if (!isLastRound) {
                 Card drawnCard = deck.draw();
 
@@ -434,71 +423,80 @@ public class Game {
             int cardDiscardedIndex1 = 0;
             int cardDiscardedIndex2 = 0;
             boolean validCard1 = false;
-
-            System.out.println("Current Player: " + currentPlayer.getName());
+            boolean validCard2 = false;
 
             this.displayTable();
             this.displayCollected(currentPlayer);
             DisplayUtility.printDivider("DISCARD FIRST CARD");
             this.displayHand(currentPlayer);
 
-            Scanner inputScanner = new Scanner(System.in);
+            if (currentPlayer instanceof BotPlayer bot) {
+                bot.botDiscard();
+            } else {
+                // prompt user to discard 2 cards, then display the remaining cards, and the
+                // updated collection of the player.
+                
+                Scanner inputScanner = new Scanner(System.in);
 
-            while (!validCard1) { // Prompts user until they input a valid card
-                try {
-                    System.out.println("Enter first card to be discarded (index of card): ");
-                    int cardNumber = inputScanner.nextInt();
-
-                    if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
-                        cardDiscardedIndex1 = cardNumber;
-                        validCard1 = true;
+                while (!validCard1) { // Prompts user until they input a valid card
+                    try {
+                        System.out.println("Enter first card to be discarded (index of card): ");
+                        int cardNumber = inputScanner.nextInt();
+                        
+                        if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
+                            cardDiscardedIndex1 = cardNumber;
+                            validCard1 = true;
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println();
+                        System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+                        System.out.println();
+                        inputScanner.nextLine();
+                    } catch (Exception e) {
+                        System.out.println();
+                        System.out.println("ERROR! " + e.getMessage());
+                        System.out.println();
                     }
 
-                } catch (InputMismatchException e) {
-                    System.out.println();
-                    System.out.println(
-                            "ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
-                    System.out.println();
-                    inputScanner.nextLine();
-                }
-            }
+                Card firstCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex1 - 1);
+                currentPlayer.removeFromHand(firstCardDiscarded);
+                
+                DisplayUtility.printDivider("DISCARD SECOND CARD");
+                this.displayHand(currentPlayer);
 
-            Card firstCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex1 - 1);
-            currentPlayer.removeFromHand(firstCardDiscarded);
-
-            DisplayUtility.printDivider("DISCARD SECOND CARD");
-            this.displayHand(currentPlayer);
-
-            boolean validCard2 = false;
-
-            while (!validCard2) { // Prompts user until they input a valid card
-                try {
-                    System.out.println("Enter second card to be discarded (index of card): ");
-                    int cardNumber = inputScanner.nextInt();
-
-                    if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
-                        cardDiscardedIndex2 = cardNumber;
-                        validCard2 = true;
+                if (currentPlayer instanceof BotPlayer bot) {
+                    bot.botDiscard();
+                } else {
+                    while (!validCard2) { // Prompts user until they input a valid card
+                        try {
+                            System.out.println("Enter second card to be discarded (index of card): ");
+                            int cardNumber = inputScanner.nextInt();
+                            
+                            if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
+                                cardDiscardedIndex2 = cardNumber;
+                                validCard2 = true;
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println();
+                            System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
+                            System.out.println();
+                            inputScanner.nextLine();
+                        } 
                     }
-
-                } catch (InputMismatchException e) {
-                    System.out.println();
-                    System.out.println(
-                            "ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
-                    System.out.println();
-                    inputScanner.nextLine();
                 }
+
+                Card secondCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex2 - 1);
+                currentPlayer.removeFromHand(secondCardDiscarded);
             }
 
-            Card secondCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex2 - 1);
-            currentPlayer.removeFromHand(secondCardDiscarded);
-
+            // add rest to the collection
             for (Card remainingCards : currentPlayer.getPlayerHand()) {
                 currentPlayer.collectCard(remainingCards);
             }
 
             this.displayCollected(currentPlayer);
 
+            // calculate the scores
             HashMap<Card.Color, Integer> majorityCardMap = getMajorityOfEachCard();
             currentPlayer.calculateScore(majorityCardMap, is2Players);
         }
@@ -511,14 +509,11 @@ public class Game {
                 throw new CardException(
                         "ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
             }
-        } catch (Exception e) {
+        } catch (CardException e) {
             System.out.println(e.getMessage());
             return false;
         }
-        // catch (CardException e) {
-        // System.out.println(e.getMessage());
-        // return false;
-        // }
+
         return true;
     }
 }

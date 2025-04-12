@@ -1,8 +1,8 @@
 package player;
 
-import java.util.*;
 import card.*;
 import game.*;
+import java.util.*;
 
 public class BotPlayer extends Player {
     public BotPlayer(String name){
@@ -10,14 +10,14 @@ public class BotPlayer extends Player {
     }
 
     public Card cardToPlay(List<Card> parade){
-        List<Card> botHand = getPlayerHand(); // get hand of cards for bot 
+        List<Card> botHand = getPlayerHand();
         for (Card c : botHand) {
             if (c.getValue() > 0) {
-                return c; // choose any non-zero value card
+                return c; // Chooses any non-zero value card
             }
         }
-        Collections.shuffle(botHand); // shuffle the hand so that the next line takes in // do I need this ?????
-        return botHand.get(0); // if card is 0 value, choose any
+        Collections.shuffle(botHand); // Shuffles the hand to randomise the card selection
+        return botHand.get(0); 
     }
 
     public void botTurn(Game game){
@@ -28,6 +28,14 @@ public class BotPlayer extends Player {
         System.out.println(getName() + " plays: " + playCard);
         getPlayerHand();
         game.collectCardsFromParade(this, playCard);
+    }
+
+    public void botDiscard(){
+        List<Card> botHand = getPlayerHand();
+        Collections.shuffle(botHand); // Shuffles the hand to randomise the card selection
+
+        removeFromHand(botHand.get(0));
+        System.out.println(getName() + " discarded: " + botHand.get(0));
     }
 }
 
