@@ -4,7 +4,7 @@ import card.*;
 import java.util.*;
 
 public class DisplayUtility {
-    private static final String DIVIDER = "===================================================================================";
+    private static final String DIVIDER = "======================================================================================================================================================================";
     private static final String DEFAULT_COLOR = "\u001B[0m";
     private static final String RED_COLOR = "\u001B[31m";
     private static final String BLUE_COLOR = "\u001B[34m";
