@@ -396,6 +396,7 @@ public class Game {
             int cardDiscardedIndex1 = 0;
             int cardDiscardedIndex2 = 0;
             boolean validCard1 = false;
+            boolean validCard2 = false;
 
             this.displayTable();
             this.displayCollected(currentPlayer);
@@ -407,11 +408,9 @@ public class Game {
             } else {
                 // prompt user to discard 2 cards, then display the remaining cards, and the
                 // updated collection of the player.
-                int cardDiscardedIndex1 = 0;
-                int cardDiscardedIndex2 = 0;
+                
                 Scanner inputScanner = new Scanner(System.in);
 
-                boolean validCard1 = false;
                 while (!validCard1) { // Prompts user until they input a valid card
                     try {
                         System.out.println("Enter first card to be discarded (index of card): ");
@@ -438,7 +437,6 @@ public class Game {
                 DisplayUtility.printDivider("DISCARD SECOND CARD");
                 this.displayHand(currentPlayer);
 
-                boolean validCard2 = false;
                 while (!validCard2) { // Prompts user until they input a valid card
                     try {
                         System.out.println("Enter second card to be discarded (index of card): ");
