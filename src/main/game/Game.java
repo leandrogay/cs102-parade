@@ -125,7 +125,7 @@ public class Game {
             }
         }
         System.out.println();
-        System.out.print("Do you want to play again? (y/n): ");
+        System.out.print("Do you want to play again?: ");
         Scanner sc = new Scanner(System.in);
         String playAgain = sc.nextLine().trim().toLowerCase();
         switch (playAgain) {

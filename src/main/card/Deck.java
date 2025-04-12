@@ -1,15 +1,15 @@
 package card;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Deck {
     private List<Card> cards;
     private int cardCount;
     private boolean isDrawable = true;
 
-    public Deck() { 
+    public Deck() {
         this.cards = new ArrayList<>();
         prepDeck();
         shuffleDeck();
@@ -17,24 +17,24 @@ public class Deck {
     }
 
     public void prepDeck() {
-        for (Card.Color color: Card.Color.values()) { // Loop through all colors
-            for (int value = 0; value <= 10; value++) { // Loop through values 0 to 10
+        for (Card.Color color : Card.Color.values()) {
+            for (int value = 0; value <= 10; value++) {
                 cards.add(new Card(color, value));
             }
         }
     }
 
-    public void shuffleDeck () { // Shuffle the deck
+    public void shuffleDeck() {
         Collections.shuffle(cards);
     }
 
-    public Card draw() { // Draw card from deck
+    public Card draw() {
         if (cardCount > 0 && isDrawable) {
-            Card cardDrawn = cards.remove(0); // remove from top of the deck
+            Card cardDrawn = cards.remove(0);
             cardCount--;
             return cardDrawn;
         } else {
-            return null; // no card drawn if deck is empty (maybe can throw custom error here idk)
+            return null;
         }
     }
 
@@ -42,7 +42,7 @@ public class Deck {
         return cards;
     }
 
-    public int getCardCount() { // get number of cards in deck 
+    public int getCardCount() {
         return cardCount;
     }
 
@@ -53,9 +53,4 @@ public class Deck {
     public void setDrawable(boolean isDrawable) {
         this.isDrawable = isDrawable;
     }
-
-    // @Override
-    // public String toString() {
-    //     return "Deck{" + "cards=" + cards + ", cardCount=" + cardCount + '}';
-    // }
 }
