@@ -48,16 +48,6 @@ Our project uses Java programming to simulate the game's logic, allowing users t
 ### Gameplay
 1. When it is your turn, the program will display the current table, your collection, and your hand. Enter the index (starting from 1) of the card you wish to play. 
 
------
-
-### Example Usage
-
-- [Provide examples or tutorials on how to use the project.]
-
-### Screenshots or Videos
-
-- [Include any relevant screenshots or videos to illustrate usage.]
-
 ---
 
 ## Documentation
@@ -72,7 +62,7 @@ G2T4:
 - GOH YANG JUN (yangjun.goh.2022@economics.smu.edu.sg)
 - SUNKARI SARASWATI NEEHARIKA (saraswatins.2023@scis.smu.edu.sg) 
 - LEANDRO GAY (leandro.gay.2023@scis.smu.edu.sg)
-- LIM ZE YUEN
+- LIM ZE YUEN (zeyuen.lim.2023@scis.smu.edu.sg)
 - SIM KAY WEE (kaywee.sim.2024@computing.smu.edu.sg)
 - LIN KHANT PE THEIN (kpt.lin.2024@computing.smu.edu.sg)
 
