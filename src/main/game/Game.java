@@ -47,7 +47,7 @@ public class Game {
                         System.out.print("Enter name for Player " + (i + 1) + ": ");
                         String name = sc.nextLine().trim();
                         if (name.equals("")) {
-                            System.out.println("Enter valid name!");
+                            System.out.println("ERROR! Invalid input. Please enter valid name!");
                             i--;
                         } else {
                             players.add(new Player(name));
