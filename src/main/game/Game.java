@@ -46,7 +46,12 @@ public class Game {
                     case "n":
                         System.out.print("Enter name for Player " + (i + 1) + ": ");
                         String name = sc.nextLine().trim();
-                        players.add(new Player(name));
+                        if (name.equals("")) {
+                            System.out.println("Enter valid name!");
+                            i--;
+                        } else {
+                            players.add(new Player(name));
+                        }
                         break;
                     case "":  // handling for if user presses enter with no input 
                         System.out.println();
