@@ -13,8 +13,8 @@ public class Game {
     private List<Player> players = new ArrayList<>();
     private int cardsPerPlayer = 5;
     private int cardsPerTable = 6;
-    private int delayDuration = 50;
-    private int roundDelayDuration = 20;
+    private int delayDuration = 500;
+    private int roundDelayDuration = 2000;
 
     public Game(int playerNumber) {
         this.deck = new Deck();
@@ -277,7 +277,6 @@ public class Game {
     public void conductRound() {
         System.out.println();
         for (Player currentPlayer : players) {
-
             boolean isLastRound = this.checkLastRound();
 
             if (isLastRound) {
@@ -293,29 +292,37 @@ public class Game {
             Card cardPlaced = null;
             Scanner inputScanner = new Scanner(System.in);
 
-            if (currentPlayer instanceof BotPlayer bot) { // Instantiates bot player
+            if (currentPlayer instanceof BotPlayer bot) {
                 cardPlaced = bot.cardToPlay(table.getParade());
                 currentPlayer.removeFromHand(cardPlaced);
                 System.out.println(bot.getName() + " played: " + cardPlaced);
             } else {
                 boolean validCard = false;
-
-                while (!validCard) { // Prompts user until they input a valid card
+                while (!validCard) {
                     try {
-
-                        System.out.println("Enter card to put (index of card): ");
-                        int cardNumber = inputScanner.nextInt();
-
+                        System.out.println("Enter card to put (index of card) or 'q' to quit: ");
+                        String input = inputScanner.nextLine().trim().toLowerCase();
+                        
+                        if (input.equals("q")) {
+                            System.out.println();
+                            System.out.println("You have quit the game.");
+                            System.out.println();
+                            System.exit(0);
+                        }
+                        
+                        int cardNumber = Integer.parseInt(input);
                         if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
                             cardPlaced = currentPlayer.getPlayerHand().get(cardNumber - 1);
                             currentPlayer.removeFromHand(cardPlaced);
                             validCard = true;
                         }
-
+                    } catch (NumberFormatException e) {
+                        System.out.println();
+                        System.out.println("ERROR! Please enter a valid number or 'q' to quit");
+                        System.out.println();
                     } catch (InputMismatchException e) {
                         System.out.println();
-                        System.out.println("ERROR! Invalid card value! Must be between 1 and "
-                                + currentPlayer.getPlayerHand().size());
+                        System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
                         System.out.println();
                         inputScanner.nextLine();
                     } catch (Exception e) {
@@ -333,10 +340,8 @@ public class Game {
             this.displayCollected(currentPlayer);
             DisplayUtility.printLine(1);
 
-            // Draws card for player if it is not the last round
             if (!isLastRound) {
                 Card drawnCard = deck.draw();
-
                 if (drawnCard != null) {
                     currentPlayer.addToHand(drawnCard);
                 } else {
@@ -354,7 +359,6 @@ public class Game {
             } catch (Exception e) {
                 // Swallow exception
             }
-
         }
     }
 
@@ -405,20 +409,29 @@ public class Game {
             if (currentPlayer instanceof BotPlayer bot) {
                 bot.botDiscard();
             } else {
-                // prompt user to discard 2 cards, then display the remaining cards, and the
-                // updated collection of the player.
-                
                 Scanner inputScanner = new Scanner(System.in);
     
-                while (!validCard1) { // Prompts user until they input a valid card
+                while (!validCard1) {
                     try {
-                        System.out.println("Enter first card to be discarded (index of card): ");
-                        int cardNumber = inputScanner.nextInt();
+                        System.out.println("Enter first card to be discarded (index of card) or 'q' to quit: ");
+                        String input = inputScanner.nextLine().trim().toLowerCase();
                         
+                        if (input.equals("q")) {
+                            System.out.println();
+                            System.out.println("You have quit the game.");
+                            System.out.println();
+                            System.exit(0);
+                        }
+                        
+                        int cardNumber = Integer.parseInt(input);
                         if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
                             cardDiscardedIndex1 = cardNumber;
                             validCard1 = true;
                         }
+                    } catch (NumberFormatException e) {
+                        System.out.println();
+                        System.out.println("ERROR! Please enter a valid number or 'q' to quit");
+                        System.out.println();
                     } catch (InputMismatchException e) {
                         System.out.println();
                         System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
@@ -439,19 +452,35 @@ public class Game {
     
                 while (!validCard2) { // Prompts user until they input a valid card
                     try {
-                        System.out.println("Enter second card to be discarded (index of card): ");
-                        int cardNumber = inputScanner.nextInt();
+                        System.out.println("Enter second card to be discarded (index of card) or 'q' to quit: ");
+                        String input = inputScanner.nextLine().trim().toLowerCase();
                         
+                        if (input.equals("q")) {
+                            System.out.println();
+                            System.out.println("You have quit the game.");
+                            System.out.println();
+                            System.exit(0);
+                        }
+                        
+                        int cardNumber = Integer.parseInt(input);
                         if (this.checkValidCardPlacement(cardNumber, currentPlayer)) {
                             cardDiscardedIndex2 = cardNumber;
                             validCard2 = true;
                         }
+                    } catch (NumberFormatException e) {
+                        System.out.println();
+                        System.out.println("ERROR! Please enter a valid number or 'q' to quit");
+                        System.out.println();
                     } catch (InputMismatchException e) {
                         System.out.println();
                         System.out.println("ERROR! Invalid card value! Must be between 1 and " + currentPlayer.getPlayerHand().size());
                         System.out.println();
                         inputScanner.nextLine();
-                    } 
+                    } catch (Exception e) {
+                        System.out.println();
+                        System.out.println("ERROR! " + e.getMessage());
+                        System.out.println();
+                    }
                 }
     
                 Card secondCardDiscarded = currentPlayer.getPlayerHand().get(cardDiscardedIndex2 - 1);
