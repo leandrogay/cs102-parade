@@ -48,10 +48,17 @@ public class Game {
                         String name = sc.nextLine().trim();
                         players.add(new Player(name));
                         break;
+                    case "":  // handling for if user presses enter with no input 
+                        System.out.println();
+                        System.out.println("ERROR! Invalid input. Please enter either y or n");
+                        System.out.println();
+                        i--; // to reset player setup
+                        break;
                     default:
                         System.out.println();
                         System.out.println("ERROR! Invalid input. Please enter either y or n");
                         System.out.println();
+                        i--; // to reset player setup 
                         break;
                 }
             }
